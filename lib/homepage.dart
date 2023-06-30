@@ -7,8 +7,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
           Row(
             children: [
@@ -54,25 +53,31 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
+          SizedBox(
+            width: double.infinity,
+            height: 350,
             child: GridView.count(
+              padding: EdgeInsets.all(20),
               crossAxisCount: 2,
               mainAxisSpacing: 4,
-              childAspectRatio: 1.5,
               scrollDirection: Axis.horizontal,
               children: [
                 InkWell(
                   child: Image(
-                    image: AssetImage("assets/songsSS/chayapattu.jpeg"),
-                    width: 40,
-                    height: 40,
+                    image: AssetImage(
+                      "assets/songsSS/chayapattu.jpeg",
+                    ),
                   ),
                 ),
                 InkWell(
                   child: Image.asset(
-                      "assets/songsSS/ee39c9d3-177c-4045-b0b2-c1e3df597370_1024.jpeg"),
+                    "assets/songsSS/ee39c9d3-177c-4045-b0b2-c1e3df597370_1024.jpeg",
+                  ),
                 ),
-                InkWell(child: Image.asset("assets/songsSS/letme.jpeg")),
+                InkWell(
+                    child: Image.asset(
+                  "assets/songsSS/letme.jpeg",
+                )),
                 InkWell(child: Image.asset("assets/songsSS/mocking bird.jpeg")),
                 InkWell(child: Image.asset("assets/songsSS/rahmatun.jpeg")),
                 InkWell(
@@ -84,14 +89,14 @@ class HomePage extends StatelessWidget {
                         Image.asset("assets/songsSS/urukumen azhalinu.jpeg")),
                 InkWell(
                     child: Image.asset("assets/songsSS/We_Are_One_cover.png")),
+                InkWell(child: Image.asset("assets/songsSS/life of ram.jpeg")),
+                InkWell(child: Image.asset("assets/songsSS/rapgod.jpeg")),
               ],
             ),
           ),
 
           // add the item recently played
-          SizedBox(
-            height: 30,
-          ),
+
           ListTile(
             title: Text("START RADIO FROM A SONG",
                 style: TextStyle(
@@ -102,6 +107,32 @@ class HomePage extends StatelessWidget {
             ),
             // we need to addd list view for adding song
           ),
+
+          SizedBox(
+            height: 300,
+            child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: Container(
+                      width: 50,
+                      height: 50,
+                      color: Colors.red,
+                    ),
+                    title: Text(
+                      "song name ${index}",
+                      style: kwhite,
+                    ),
+                    subtitle: Text(
+                      "nappps",
+                      style: TextStyle(color: Colors.white38),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return Divider();
+                },
+                itemCount: 10),
+          )
         ],
       ),
     );
