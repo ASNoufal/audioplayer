@@ -1,8 +1,16 @@
 import 'package:audio_player/kvalues.dart';
+import 'package:audio_player/musicpage.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int? _selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -112,24 +120,46 @@ class HomePage extends StatelessWidget {
             height: 300,
             child: ListView.separated(
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: Container(
-                      width: 50,
-                      height: 50,
-                      color: Colors.red,
-                    ),
-                    title: Text(
-                      "song name ${index}",
-                      style: kwhite,
-                    ),
-                    subtitle: Text(
-                      "nappps",
-                      style: TextStyle(color: Colors.white38),
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return MusicPage();
+                      }));
+                    },
+                    //function of song
+                    child: ListTile(
+                      leading: Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(Songpicture[index]))),
+                        width: 60,
+                        height: 80,
+                      ),
+                      title: Text(
+                        Songname[index],
+                        style: kwhite,
+                      ),
+                      subtitle: Text(
+                        authorname[index],
+                        style: TextStyle(color: Colors.white38),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.favorite,
+                            color: // need to checkkkkkk to add to favarote need updatee not fuctionalise
+                                _selectedIndex != null &&
+                                        _selectedIndex == index
+                                    ? Colors.red
+                                    : Colors.white),
+                        onPressed: () => setState(() {
+                          _selectedIndex = index;
+                        }),
+                      ),
                     ),
                   );
                 },
                 separatorBuilder: (context, index) {
-                  return Divider();
+                  return const SizedBox();
                 },
                 itemCount: 10),
           )
