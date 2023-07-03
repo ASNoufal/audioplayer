@@ -73,11 +73,17 @@ class _MusicPageState extends State<MusicPage> {
             CircleAvatar(
               child: IconButton(
                   onPressed: () {
-                    if (isplaying) {
-                      assetsAudioPlayer.pause();
-                    } else {
-                      assetsAudioPlayer.play();
-                    }
+                    setState(() {
+                      if (isplaying) {
+                        assetsAudioPlayer.pause();
+                        isplaying = false;
+                      } else {
+                        assetsAudioPlayer.play();
+                        isplaying = true;
+                      }
+                    });
+
+                    // just attach the one song from the package need to update
 
                     // if (isplaying) {
                     //   await player.pause();
