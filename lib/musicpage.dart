@@ -20,12 +20,13 @@ class _MusicPageState extends State<MusicPage> {
   @override
   void initState() {
     super.initState();
-
     audio();
   }
 
   void audio() {
     setState(() {
+      // here we need to connect the slider and the music by adding some codes in audio assets package
+
       assetsAudioPlayer.open(
           Audio(
               "assets/songsmp3/Chayapattu-Project-Malabaricus-Sithara-Krishnakumar.mp3"),
@@ -43,23 +44,27 @@ class _MusicPageState extends State<MusicPage> {
         ),
         body: Column(
           children: [
+            Image.asset("assets/songsSS/chayapattu.jpeg"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(onPressed: () {}, icon: const Icon(Icons.favorite)),
+                Text(
+                  "Chayapatt",
+                  style: kdash,
+                ),
                 IconButton(onPressed: () {}, icon: Icon(Icons.add))
               ],
-            ),
-            Image.asset("assets/songsSS/chayapattu.jpeg"),
-            Text(
-              "Chayapatt",
-              style: kdash,
             ),
             Slider(
                 min: 0,
                 max: duration.inSeconds.toDouble(),
                 value: position.inSeconds.toDouble(),
-                onChanged: (double value) {}),
+                onChanged: (double value) {
+                  setState(() {
+                    position = value as Duration;
+                  });
+                }),
             SizedBox(
               width: 320,
               child: Row(

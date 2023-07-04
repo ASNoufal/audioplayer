@@ -37,7 +37,7 @@ class _BottomNavigatonBarState extends State<BottomNavigatonBar> {
                   _selectedIndex = index;
                 }),
             mouseCursor: MaterialStateMouseCursor.textable,
-            selectedIconTheme: IconThemeData(color: Colors.white),
+            selectedIconTheme: const IconThemeData(color: Colors.white),
             unselectedItemColor: Colors.white38,
             selectedItemColor: Colors.white,
             items: const [
