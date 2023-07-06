@@ -11,41 +11,47 @@ class SettingsPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          ListTile(
-            title: Text("Notification"),
-            trailing: Icon(Icons.arrow_forward),
+          SettingsName(
+            titleData: "Notification",
+            subtitleData: "to get notification",
           ),
-          ListTile(
-            title: Text("Nick Name"),
-            trailing: Icon(Icons.arrow_forward),
+          SettingsName(
+            titleData: "Terms and Condition",
+            subtitleData: "All the stuff you need to know",
           ),
-          ListTile(
-            title: Text("Terms and Condition"),
-            subtitle: Text("All the stuff you need to know"),
-            trailing: Icon(Icons.arrow_forward),
+          SettingsName(
+            titleData: "Privacy Policy",
+            subtitleData: "Important for both of us",
           ),
-          ListTile(
-            title: Text("Privacy Policy"),
-            subtitle: Text("Important for both of us"),
-            trailing: Icon(Icons.arrow_forward),
+          SettingsName(
+            titleData: "Share the App",
+            subtitleData: "shareeee....!!!",
           ),
-          ListTile(
-            title: Text("Share the App"),
-            subtitle: Text("shareeee....!!!"),
-            trailing: Icon(Icons.arrow_forward),
+          SettingsName(
+            titleData: "Third party Application",
+            subtitleData: "......!!!!",
           ),
-          ListTile(
-            title: Text("Third party Application"),
-            subtitle: Text("......!!!!"),
-            trailing: Icon(Icons.arrow_forward),
+          SettingsName(
+            titleData: "About",
+            subtitleData: "About the App",
           ),
-          ListTile(
-            title: Text("About"),
-            subtitle: Text("About the App"),
-            trailing: Icon(Icons.arrow_forward),
-          )
         ],
       ),
+    );
+  }
+}
+
+class SettingsName extends StatelessWidget {
+  const SettingsName(
+      {super.key, required this.titleData, required this.subtitleData});
+  final String titleData;
+  final String subtitleData;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(titleData),
+      subtitle: Text(subtitleData),
+      trailing: Icon(Icons.arrow_forward),
     );
   }
 }
