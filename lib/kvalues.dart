@@ -1,4 +1,8 @@
+import 'package:audio_player/model/datamodel.dart';
+import 'package:audio_player/model/datamodel.dart';
 import 'package:flutter/material.dart';
+
+import 'model/datamodel.dart';
 
 const kdash =
     TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold);

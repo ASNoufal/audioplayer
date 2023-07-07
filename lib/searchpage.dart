@@ -8,6 +8,7 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        backgroundColor: Colors.black12,
         title: Text("Search"),
       ),
       body: Column(

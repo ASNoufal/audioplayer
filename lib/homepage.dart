@@ -1,4 +1,6 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audio_player/kvalues.dart';
+import 'package:audio_player/model/datamodel.dart';
 import 'package:audio_player/musicpage.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +12,72 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int? _selectedIndex;
+  final assetaudioplayer = AssetsAudioPlayer();
+  @override
+  void initState() {
+    audios();
+    super.initState();
+  }
 
+  void audios() {
+    setState(() {
+      assetaudioplayer.open(
+          Audio(
+              "assets/songsmp3/Chayapattu-Project-Malabaricus-Sithara-Krishnakumar.mp3"),
+          autoStart: false,
+          showNotification: true);
+    });
+  }
+
+  int? _selectedIndex;
+  bool isplaying = false;
   @override
   Widget build(BuildContext context) {
+    List<DataModel> dataModel = [
+      DataModel(
+          authorname: 'Sithara',
+          songname: "Chayappattu",
+          songpic: "assets/songsSS/chayapattu.jpeg"),
+      DataModel(
+          authorname: "Ghazal ",
+          songname: "Aise Kyun(Ghazal Version)",
+          songpic:
+              "assets/songsSS/ee39c9d3-177c-4045-b0b2-c1e3df597370_1024.jpeg"),
+      DataModel(
+          authorname: "Nappu",
+          songname: "Let Me Down Slowly",
+          songpic: "assets/songsSS/letme.jpeg"),
+      DataModel(
+          authorname: "suku",
+          songname: "Life of ram",
+          songpic: "assets/songsSS/life of ram.jpeg"),
+      DataModel(
+          authorname: "Eminem",
+          songname: "Mocking bird",
+          songpic: "assets/songsSS/mocking bird.jpeg"),
+      DataModel(
+          authorname: "kadar",
+          songname: "Rahmatun Lil Alameen",
+          songpic: "assets/songsSS/rahmatun.jpeg"),
+      DataModel(
+          authorname: "ganu",
+          songname: "Rap God",
+          songpic: "assets/songsSS/rapgod.jpeg"),
+      DataModel(
+          authorname: "jabaz",
+          songname: "Sulaikha Manzil",
+          songpic:
+              "assets/songsSS/Sulaikha-Manzil-Malayalam-2023-20230509171010-500x500.jpeg"),
+      DataModel(
+          authorname: "ajml",
+          songname: "Urukumen Azhalinu Thanalu",
+          songpic: "assets/songsSS/urukumen azhalinu.jpeg"),
+      DataModel(
+          authorname: "pitbull",
+          songname: "We are one by pitbull",
+          songpic: "assets/songsSS/We_Are_One_cover.png"),
+    ];
+
     return SafeArea(
       child: ListView(
         children: [
@@ -63,49 +127,84 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(
             width: double.infinity,
-            height: 350,
-            child: GridView.count(
-              padding: EdgeInsets.all(20),
-              crossAxisCount: 2,
-              mainAxisSpacing: 4,
-              scrollDirection: Axis.horizontal,
-              children: [
-                InkWell(
-                  child: Image(
-                    image: AssetImage(
-                      "assets/songsSS/chayapattu.jpeg",
+            height: 200,
+            child: GridView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: dataModel.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1),
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(dataModel[index].songpic),
+                        ),
+                      ),
+                      child: Center(
+                          child: CircleAvatar(
+                        child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                if (isplaying) {
+                                  assetaudioplayer.pause();
+                                  isplaying = false;
+                                } else {
+                                  assetaudioplayer.play();
+                                  isplaying = true;
+                                }
+                              });
+                            },
+                            icon: isplaying
+                                ? const Icon(Icons.pause)
+                                : const Icon(Icons.play_arrow)),
+                      )),
                     ),
-                  ),
-                ),
-                InkWell(
-                  child: Image.asset(
-                    "assets/songsSS/ee39c9d3-177c-4045-b0b2-c1e3df597370_1024.jpeg",
-                  ),
-                ),
-                InkWell(
-                    child: Image.asset(
-                  "assets/songsSS/letme.jpeg",
-                )),
-                InkWell(child: Image.asset("assets/songsSS/mocking bird.jpeg")),
-                InkWell(child: Image.asset("assets/songsSS/rahmatun.jpeg")),
-                InkWell(
-                  child: Image.asset(
-                      "assets/songsSS/Sulaikha-Manzil-Malayalam-2023-20230509171010-500x500.jpeg"),
-                ),
-                InkWell(
-                    child:
-                        Image.asset("assets/songsSS/urukumen azhalinu.jpeg")),
-                InkWell(
-                    child: Image.asset("assets/songsSS/We_Are_One_cover.png")),
-                InkWell(child: Image.asset("assets/songsSS/life of ram.jpeg")),
-                InkWell(child: Image.asset("assets/songsSS/rapgod.jpeg")),
-              ],
-            ),
+                  );
+                }),
+            // child: GridView.count(
+            //   padding: EdgeInsets.all(20),
+            //   crossAxisCount: 2,
+            //   mainAxisSpacing: 4,
+            //   scrollDirection: Axis.horizontal,
+            //   children: [
+            //     InkWell(
+            //       child: Image(
+            //         image: AssetImage(
+            //           "assets/songsSS/chayapattu.jpeg",
+            //         ),
+            //       ),
+            //     ),
+            //     InkWell(
+            //       child: Image.asset(
+            //         "assets/songsSS/ee39c9d3-177c-4045-b0b2-c1e3df597370_1024.jpeg",
+            //       ),
+            //     ),
+            //     InkWell(
+            //         child: Image.asset(
+            //       "assets/songsSS/letme.jpeg",
+            //     )),
+            //     InkWell(child: Image.asset("assets/songsSS/mocking bird.jpeg")),
+            //     InkWell(child: Image.asset("assets/songsSS/rahmatun.jpeg")),
+            //     InkWell(
+            //       child: Image.asset(
+            //           "assets/songsSS/Sulaikha-Manzil-Malayalam-2023-20230509171010-500x500.jpeg"),
+            //     ),
+            //     InkWell(
+            //         child:
+            //             Image.asset("assets/songsSS/urukumen azhalinu.jpeg")),
+            //     InkWell(
+            //         child: Image.asset("assets/songsSS/We_Are_One_cover.png")),
+            //     InkWell(child: Image.asset("assets/songsSS/life of ram.jpeg")),
+            //     InkWell(child: Image.asset("assets/songsSS/rapgod.jpeg")),
+            //   ],
+            // ),
           ),
 
           // add the item recently played
 
-          ListTile(
+          const ListTile(
             title: Text("START RADIO FROM A SONG",
                 style: TextStyle(
                     color: Colors.white38, fontSize: 10, letterSpacing: 1)),
@@ -142,7 +241,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       subtitle: Text(
                         authorname[index],
-                        style: TextStyle(color: Colors.white38),
+                        style: const TextStyle(color: Colors.white38),
                       ),
                       trailing: IconButton(
                         icon: Icon(Icons.favorite,
