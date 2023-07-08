@@ -29,8 +29,9 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  int? _selectedIndex;
+  List _selectedIndex = [];
   bool isplaying = false;
+  bool favarite = false;
   @override
   Widget build(BuildContext context) {
     List<DataModel> dataModel = [
@@ -83,9 +84,6 @@ class _HomePageState extends State<HomePage> {
         children: [
           Row(
             children: [
-              SizedBox(
-                width: 10,
-              )
               const Padding(
                 padding: EdgeInsets.all(15.0),
                 child: Text(
@@ -249,12 +247,16 @@ class _HomePageState extends State<HomePage> {
                       trailing: IconButton(
                         icon: Icon(Icons.favorite,
                             color: // need to checkkkkkk to add to favarote need updatee not fuctionalise
-                                _selectedIndex != null &&
-                                        _selectedIndex == index
+                                _selectedIndex.contains(index)
                                     ? Colors.red
                                     : Colors.white),
                         onPressed: () => setState(() {
-                          _selectedIndex = index;
+                          if (_selectedIndex.contains(index)) {
+                            _selectedIndex.remove(index);
+                          } else {
+                            _selectedIndex.add(index);
+                          }
+                          // print(_selectedIndex);
                         }),
                       ),
                     ),
