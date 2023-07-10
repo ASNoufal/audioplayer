@@ -235,7 +235,7 @@ class _HomePageState extends State<HomePage> {
           ),
 
           SizedBox(
-            height: 300,
+            height: 350,
             child: ListView.separated(
                 itemBuilder: (context, index) {
                   return InkWell(

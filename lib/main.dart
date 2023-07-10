@@ -30,7 +30,6 @@ class _BottomNavigatonBarState extends State<BottomNavigatonBar> {
       bottomNavigationBar: Theme(
         data: ThemeData(canvasColor: Colors.transparent),
         child: BottomNavigationBar(
-            backgroundColor: Colors.transparent,
             showUnselectedLabels: true,
             currentIndex: _selectedIndex,
             onTap: (index) => setState(() {
