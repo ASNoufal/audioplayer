@@ -38,45 +38,58 @@ class _HomePageState extends State<HomePage> {
       DataModel(
           authorname: 'Sithara',
           songname: "Chayappattu",
-          songpic: "assets/songsSS/chayapattu.jpeg"),
+          songpic: "assets/songsSS/chayapattu.jpeg",
+          url:
+              "assets/songsmp3/Chayapattu-Project-Malabaricus-Sithara-Krishnakumar.mp3"),
       DataModel(
           authorname: "Ghazal ",
           songname: "Aise Kyun(Ghazal Version)",
           songpic:
-              "assets/songsSS/ee39c9d3-177c-4045-b0b2-c1e3df597370_1024.jpeg"),
+              "assets/songsSS/ee39c9d3-177c-4045-b0b2-c1e3df597370_1024.jpeg",
+          url:
+              "assets/songsmp3/Aise Kyun (Ghazal Version)_192(Ghantalele.com).mp3"),
       DataModel(
           authorname: "Nappu",
           songname: "Let Me Down Slowly",
-          songpic: "assets/songsSS/letme.jpeg"),
+          songpic: "assets/songsSS/letme.jpeg",
+          url: "assets/songsmp3/Let Me Down Slowly Alec Benjamin 128 Kbps.mp3"),
       DataModel(
           authorname: "suku",
           songname: "Life of ram",
-          songpic: "assets/songsSS/life of ram.jpeg"),
+          songpic: "assets/songsSS/life of ram.jpeg",
+          url: "assets/songsmp3/The_Life_Of_Ram-MassTamilan.com.mp3"),
       DataModel(
           authorname: "Eminem",
           songname: "Mocking bird",
-          songpic: "assets/songsSS/mocking bird.jpeg"),
+          songpic: "assets/songsSS/mocking bird.jpeg",
+          url: "assets/songsmp3/Mockingbird(PaglaSongs).mp3"),
       DataModel(
           authorname: "kadar",
           songname: "Rahmatun Lil Alameen",
-          songpic: "assets/songsSS/rahmatun.jpeg"),
+          songpic: "assets/songsSS/rahmatun.jpeg",
+          url: "assets/songsmp3/rahmatun-lil-alameen.mp3"),
       DataModel(
           authorname: "ganu",
           songname: "Rap God",
-          songpic: "assets/songsSS/rapgod.jpeg"),
+          songpic: "assets/songsSS/rapgod.jpeg",
+          url: "assets/songsmp3/Rap-God---Eminem-320(PagalWorld).mp3"),
       DataModel(
           authorname: "jabaz",
           songname: "Sulaikha Manzil",
           songpic:
-              "assets/songsSS/Sulaikha-Manzil-Malayalam-2023-20230509171010-500x500.jpeg"),
+              "assets/songsSS/Sulaikha-Manzil-Malayalam-2023-20230509171010-500x500.jpeg",
+          url: "assets/songsmp3/Haal-Aake-Maarunne-MassTamilan.dev.mp3"),
       DataModel(
           authorname: "ajml",
           songname: "Urukumen Azhalinu Thanalu",
-          songpic: "assets/songsSS/urukumen azhalinu.jpeg"),
+          songpic: "assets/songsSS/urukumen azhalinu.jpeg",
+          url:
+              "assets/songsmp3/Urukumen Azhalinu Thanalu Lofi_64-(DJPunjab).mp3"),
       DataModel(
           authorname: "pitbull",
           songname: "We are one by pitbull",
-          songpic: "assets/songsSS/We_Are_One_cover.png"),
+          songpic: "assets/songsSS/We_Are_One_cover.png",
+          url: "assets/songsmp3/We-Are-One-(Ole-Ola)(PaglaSongs).mp3"),
     ];
 
     return SafeArea(
@@ -108,7 +121,11 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           ListTile(
-            leading: const CircleAvatar(),
+            leading: const CircleAvatar(
+              backgroundImage: AssetImage(
+                  "assets/songsSS/pngtree-cute-red-blue-musical-notes-music-logo-png-image_3223600.jpeg"),
+              radius: 25,
+            ),
             title: const Text(
               "NAUFAL AS",
               style: TextStyle(
@@ -144,23 +161,24 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       child: Center(
-                          child: CircleAvatar(
-                        child: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                if (isplaying) {
-                                  assetaudioplayer.pause();
-                                  isplaying = false;
-                                } else {
-                                  assetaudioplayer.play();
-                                  isplaying = true;
-                                }
-                              });
-                            },
-                            icon: isplaying
-                                ? const Icon(Icons.pause)
-                                : const Icon(Icons.play_arrow)),
-                      )),
+                        child: CircleAvatar(
+                          child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (isplaying) {
+                                    assetaudioplayer.pause();
+                                    isplaying = false;
+                                  } else {
+                                    assetaudioplayer.play();
+                                    isplaying = true;
+                                  }
+                                });
+                              },
+                              icon: isplaying
+                                  ? const Icon(Icons.pause)
+                                  : const Icon(Icons.play_arrow)),
+                        ),
+                      ),
                     ),
                   );
                 }),
@@ -224,7 +242,10 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return MusicPage();
+                        return MusicPage(
+                          dataModel: dataModel,
+                          indexofsong: index,
+                        );
                       }));
                     },
                     //function of song
@@ -256,6 +277,7 @@ class _HomePageState extends State<HomePage> {
                           } else {
                             _selectedIndex.add(index);
                           }
+
                           // print(_selectedIndex);
                         }),
                       ),
