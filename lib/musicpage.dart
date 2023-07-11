@@ -3,8 +3,6 @@ import 'package:audio_player/model/datamodel.dart';
 import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
-import 'package:intl/intl.dart';
-
 class MusicPage extends StatefulWidget {
   const MusicPage(
       {super.key, required this.dataModel, required this.indexofsong});
@@ -33,8 +31,18 @@ class _MusicPageState extends State<MusicPage> {
       // here we need to connect the slider and the music by adding some codes in audio assets package
 
       assetsAudioPlayer.open(
-          Audio(
-              "assets/songsmp3/Chayapattu-Project-Malabaricus-Sithara-Krishnakumar.mp3"),
+          Playlist(audios: [
+            Audio(widget.dataModel[0].url),
+            Audio(widget.dataModel[1].url),
+            Audio(widget.dataModel[2].url),
+            Audio(widget.dataModel[3].url),
+            Audio(widget.dataModel[4].url),
+            Audio(widget.dataModel[5].url),
+            Audio(widget.dataModel[6].url),
+            Audio(widget.dataModel[7].url),
+            Audio(widget.dataModel[8].url),
+            Audio(widget.dataModel[9].url),
+          ]),
           autoStart: false,
           showNotification: true);
     });
@@ -77,16 +85,6 @@ class _MusicPageState extends State<MusicPage> {
               ),
             ),
           ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children: [
-
-          //     Text(
-          //       widget.dataModel[widget.indexofsong].songname,
-          //       style: ,
-          //     ),
-          //   ],
-
           SizedBox(
             width: 400,
             child: Slider(
@@ -141,7 +139,8 @@ class _MusicPageState extends State<MusicPage> {
                               assetsAudioPlayer.pause();
                               isplaying = false;
                             } else {
-                              assetsAudioPlayer.play();
+                              assetsAudioPlayer
+                                  .playlistPlayAtIndex(widget.indexofsong);
                               isplaying = true;
                             }
                           });
