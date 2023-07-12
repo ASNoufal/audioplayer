@@ -29,6 +29,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  List songplayinquick = [];
+
   List _selectedIndex = [];
   bool isplaying = false;
   bool favarite = false;
@@ -147,13 +149,20 @@ class _HomePageState extends State<HomePage> {
             width: double.infinity,
             height: 200,
             child: GridView.builder(
+                padding: const EdgeInsets.only(left: 20, bottom: 10, top: 10),
                 scrollDirection: Axis.horizontal,
                 itemCount: dataModel.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1),
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return MusicPage(
+                            dataModel: dataModel, indexofsong: index);
+                      }));
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -163,20 +172,21 @@ class _HomePageState extends State<HomePage> {
                       child: Center(
                         child: CircleAvatar(
                           child: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  if (isplaying) {
-                                    assetaudioplayer.pause();
-                                    isplaying = false;
-                                  } else {
-                                    assetaudioplayer.play();
-                                    isplaying = true;
-                                  }
-                                });
-                              },
-                              icon: isplaying
-                                  ? const Icon(Icons.pause)
-                                  : const Icon(Icons.play_arrow)),
+                            icon: songplayinquick.contains(index)
+                                ? const Icon(Icons.pause)
+                                : const Icon(Icons.play_arrow),
+                            onPressed: () => setState(() {
+                              // if (songplayinquick.contains(index)) {
+                              //   // assetaudioplayer.pause();
+                              //   songplayinquick.remove(index);
+                              //   print(songplayinquick);
+                              // } else {
+                              //   // assetaudioplayer.play();
+                              //   songplayinquick.add(index);
+
+                              // }
+                            }),
+                          ),
                         ),
                       ),
                     ),
