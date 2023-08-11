@@ -1,7 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audio_player/kvalues.dart';
-import 'package:audio_player/model/datamodel.dart';
-import 'package:audio_player/musicpage.dart';
+import 'package:audio_player/screens/musicpage.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,21 +12,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final assetaudioplayer = AssetsAudioPlayer();
-  @override
-  void initState() {
-    audios();
-    super.initState();
-  }
-
-  void audios() {
-    setState(() {
-      assetaudioplayer.open(
-          Audio(
-              "assets/songsmp3/Chayapattu-Project-Malabaricus-Sithara-Krishnakumar.mp3"),
-          autoStart: false,
-          showNotification: true);
-    });
-  }
 
   List songplayinquick = [];
 
@@ -36,64 +20,6 @@ class _HomePageState extends State<HomePage> {
   bool favarite = false;
   @override
   Widget build(BuildContext context) {
-    List<DataModel> dataModel = [
-      DataModel(
-          authorname: 'Sithara',
-          songname: "Chayappattu",
-          songpic: "assets/songsSS/chayapattu.jpeg",
-          url:
-              "assets/songsmp3/Chayapattu-Project-Malabaricus-Sithara-Krishnakumar.mp3"),
-      DataModel(
-          authorname: "Ghazal ",
-          songname: "Aise Kyun(Ghazal Version)",
-          songpic:
-              "assets/songsSS/ee39c9d3-177c-4045-b0b2-c1e3df597370_1024.jpeg",
-          url:
-              "assets/songsmp3/Aise Kyun (Ghazal Version)_192(Ghantalele.com).mp3"),
-      DataModel(
-          authorname: "Nappu",
-          songname: "Let Me Down Slowly",
-          songpic: "assets/songsSS/letme.jpeg",
-          url: "assets/songsmp3/Let Me Down Slowly Alec Benjamin 128 Kbps.mp3"),
-      DataModel(
-          authorname: "suku",
-          songname: "Life of ram",
-          songpic: "assets/songsSS/life of ram.jpeg",
-          url: "assets/songsmp3/The_Life_Of_Ram-MassTamilan.com.mp3"),
-      DataModel(
-          authorname: "Eminem",
-          songname: "Mocking bird",
-          songpic: "assets/songsSS/mocking bird.jpeg",
-          url: "assets/songsmp3/Mockingbird(PaglaSongs).mp3"),
-      DataModel(
-          authorname: "kadar",
-          songname: "Rahmatun Lil Alameen",
-          songpic: "assets/songsSS/rahmatun.jpeg",
-          url: "assets/songsmp3/rahmatun-lil-alameen.mp3"),
-      DataModel(
-          authorname: "ganu",
-          songname: "Rap God",
-          songpic: "assets/songsSS/rapgod.jpeg",
-          url: "assets/songsmp3/Rap-God---Eminem-320(PagalWorld).mp3"),
-      DataModel(
-          authorname: "jabaz",
-          songname: "Sulaikha Manzil",
-          songpic:
-              "assets/songsSS/Sulaikha-Manzil-Malayalam-2023-20230509171010-500x500.jpeg",
-          url: "assets/songsmp3/Haal-Aake-Maarunne-MassTamilan.dev.mp3"),
-      DataModel(
-          authorname: "ajml",
-          songname: "Urukumen Azhalinu Thanalu",
-          songpic: "assets/songsSS/urukumen azhalinu.jpeg",
-          url:
-              "assets/songsmp3/Urukumen Azhalinu Thanalu Lofi_64-(DJPunjab).mp3"),
-      DataModel(
-          authorname: "pitbull",
-          songname: "We are one by pitbull",
-          songpic: "assets/songsSS/We_Are_One_cover.png",
-          url: "assets/songsmp3/We-Are-One-(Ole-Ola)(PaglaSongs).mp3"),
-    ];
-
     return SafeArea(
       child: ListView(
         children: [
@@ -169,66 +95,12 @@ class _HomePageState extends State<HomePage> {
                           image: AssetImage(dataModel[index].songpic),
                         ),
                       ),
-                      child: Center(
-                        child: CircleAvatar(
-                          child: IconButton(
-                            icon: songplayinquick.contains(index)
-                                ? const Icon(Icons.pause)
-                                : const Icon(Icons.play_arrow),
-                            onPressed: () => setState(() {
-                              // if (songplayinquick.contains(index)) {
-                              //   // assetaudioplayer.pause();
-                              //   songplayinquick.remove(index);
-                              //   print(songplayinquick);
-                              // } else {
-                              //   // assetaudioplayer.play();
-                              //   songplayinquick.add(index);
-
-                              // }
-                            }),
-                          ),
-                        ),
+                      child:  const Center(
+                        child: CircleAvatar(child: Icon(Icons.play_arrow)),
                       ),
                     ),
                   );
                 }),
-            // child: GridView.count(
-            //   padding: EdgeInsets.all(20),
-            //   crossAxisCount: 2,
-            //   mainAxisSpacing: 4,
-            //   scrollDirection: Axis.horizontal,
-            //   children: [
-            //     InkWell(
-            //       child: Image(
-            //         image: AssetImage(
-            //           "assets/songsSS/chayapattu.jpeg",
-            //         ),
-            //       ),
-            //     ),
-            //     InkWell(
-            //       child: Image.asset(
-            //         "assets/songsSS/ee39c9d3-177c-4045-b0b2-c1e3df597370_1024.jpeg",
-            //       ),
-            //     ),
-            //     InkWell(
-            //         child: Image.asset(
-            //       "assets/songsSS/letme.jpeg",
-            //     )),
-            //     InkWell(child: Image.asset("assets/songsSS/mocking bird.jpeg")),
-            //     InkWell(child: Image.asset("assets/songsSS/rahmatun.jpeg")),
-            //     InkWell(
-            //       child: Image.asset(
-            //           "assets/songsSS/Sulaikha-Manzil-Malayalam-2023-20230509171010-500x500.jpeg"),
-            //     ),
-            //     InkWell(
-            //         child:
-            //             Image.asset("assets/songsSS/urukumen azhalinu.jpeg")),
-            //     InkWell(
-            //         child: Image.asset("assets/songsSS/We_Are_One_cover.png")),
-            //     InkWell(child: Image.asset("assets/songsSS/life of ram.jpeg")),
-            //     InkWell(child: Image.asset("assets/songsSS/rapgod.jpeg")),
-            //   ],
-            // ),
           ),
 
           // add the item recently played
@@ -263,16 +135,16 @@ class _HomePageState extends State<HomePage> {
                       leading: Container(
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage(Songpicture[index]))),
+                                image: AssetImage(dataModel[index].songpic))),
                         width: 60,
                         height: 80,
                       ),
                       title: Text(
-                        Songname[index],
+                        dataModel[index].songname,
                         style: kwhite,
                       ),
                       subtitle: Text(
-                        authorname[index],
+                        dataModel[index].authorname,
                         style: const TextStyle(color: Colors.white38),
                       ),
                       trailing: IconButton(
@@ -297,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                 separatorBuilder: (context, index) {
                   return const SizedBox();
                 },
-                itemCount: 10),
+                itemCount: dataModel.length),
           )
         ],
       ),

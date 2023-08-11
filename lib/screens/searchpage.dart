@@ -1,3 +1,5 @@
+import 'package:audio_player/model/datamodel.dart';
+import 'package:audio_player/screens/musicpage.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatelessWidget {
@@ -23,7 +25,7 @@ class SearchPage extends StatelessWidget {
               decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  prefixIcon: Icon(
+                  prefixIcon: const Icon(
                     Icons.search,
                     size: 30,
                     color: Colors.black,
@@ -33,6 +35,11 @@ class SearchPage extends StatelessWidget {
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(20))),
             ),
+          ),
+          Expanded(
+            child: ListView.builder(itemBuilder: (context, index) {
+              return Container();
+            }),
           )
         ],
       ),

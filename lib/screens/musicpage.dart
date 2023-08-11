@@ -169,7 +169,7 @@ class _MusicPageState extends State<MusicPage> {
                     }));
               },
             ),
-
+// need to study the slider
             // Slider(
             //     activeColor: Colors.white,
             //     inactiveColor: Colors.white54,

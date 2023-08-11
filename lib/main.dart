@@ -1,5 +1,5 @@
-import 'package:audio_player/homepage.dart';
-import 'package:audio_player/searchpage.dart';
+import 'package:audio_player/screens/homepage.dart';
+import 'package:audio_player/screens/searchpage.dart';
 import 'package:audio_player/settings.dart';
 import 'package:audio_player/yourlibrary.dart';
 import 'package:flutter/material.dart';
@@ -66,13 +66,6 @@ class _BottomNavigatonBarState extends State<BottomNavigatonBar> {
                   label: "Settings")
             ]),
       ),
-      // appBar: AppBar(
-      //   title: Text(
-      //     "Good morning",
-      //     style: TextStyle(color: Colors.white),
-      //   ),
-      // need to Add DateTime and put it in if else case
-      //),
       body: items[_selectedIndex],
     );
   }
