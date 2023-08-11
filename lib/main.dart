@@ -1,11 +1,18 @@
+import 'package:audio_player/model/datamodel.dart';
 import 'package:audio_player/screens/homepage.dart';
 import 'package:audio_player/screens/searchpage.dart';
 import 'package:audio_player/settings.dart';
 import 'package:audio_player/yourlibrary.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
-  runApp(MaterialApp(theme: ThemeData(), home: BottomNavigatonBar()));
+Future<void> main() async {
+  await Hive.initFlutter();
+
+  if (!Hive.isAdapterRegistered(DataModelAdapter().typeId)) {
+    Hive.registerAdapter(DataModelAdapter());
+  }
+  runApp(MaterialApp(theme: ThemeData(), home: const BottomNavigatonBar()));
 }
 
 class BottomNavigatonBar extends StatefulWidget {

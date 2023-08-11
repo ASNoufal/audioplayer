@@ -1,4 +1,5 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audio_player/database/sondDb.dart';
 import 'package:audio_player/kvalues.dart';
 import 'package:audio_player/screens/musicpage.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                           image: AssetImage(dataModel[index].songpic),
                         ),
                       ),
-                      child:  const Center(
+                      child: const Center(
                         child: CircleAvatar(child: Icon(Icons.play_arrow)),
                       ),
                     ),
@@ -158,6 +159,8 @@ class _HomePageState extends State<HomePage> {
                             _selectedIndex.remove(index);
                           } else {
                             _selectedIndex.add(index);
+                            final song = Songdb().addsongdata(dataModel[index]);
+                            print(song);
                           }
 
                           // print(_selectedIndex);

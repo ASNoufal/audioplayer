@@ -19,6 +19,6 @@ class DataModel {
       required this.songname,
       required this.songpic,
       required this.url}) {
-    id;
+    id = DateTime.now().microsecondsSinceEpoch.toString();
   }
 }
