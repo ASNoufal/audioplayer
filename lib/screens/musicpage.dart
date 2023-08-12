@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:audio_player/kvalues.dart';
 import 'package:audio_player/model/datamodel.dart';
 import 'package:flutter/material.dart';

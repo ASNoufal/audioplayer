@@ -1,26 +1,17 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audio_player/database/sondDb.dart';
 import 'package:audio_player/kvalues.dart';
+import 'package:audio_player/screens/favoritepage.dart';
 import 'package:audio_player/screens/musicpage.dart';
+import 'package:audio_player/widget/favoriteButton.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final assetaudioplayer = AssetsAudioPlayer();
-
-  List songplayinquick = [];
-
-  List _selectedIndex = [];
-  bool isplaying = false;
-  bool favarite = false;
-  @override
   Widget build(BuildContext context) {
+    Songdb().refreshui();
     return SafeArea(
       child: ListView(
         children: [
@@ -36,7 +27,12 @@ class _HomePageState extends State<HomePage> {
               ),
               const Spacer(),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (builder) {
+                      return const FavoriteScreen();
+                    }));
+                  },
                   icon: const Icon(
                     Icons.favorite_outline_outlined,
                     color: Colors.white,
@@ -117,63 +113,7 @@ class _HomePageState extends State<HomePage> {
             // we need to addd list view for adding song
           ),
 
-          SizedBox(
-            height: 350,
-            child: ListView.separated(
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return MusicPage(
-                          dataModel: dataModel,
-                          indexofsong: index,
-                        );
-                      }));
-                    },
-                    //function of song
-                    child: ListTile(
-                      leading: Container(
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(dataModel[index].songpic))),
-                        width: 60,
-                        height: 80,
-                      ),
-                      title: Text(
-                        dataModel[index].songname,
-                        style: kwhite,
-                      ),
-                      subtitle: Text(
-                        dataModel[index].authorname,
-                        style: const TextStyle(color: Colors.white38),
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.favorite,
-                            color: // need to checkkkkkk to add to favarote need updatee not fuctionalise
-                                _selectedIndex.contains(index)
-                                    ? Colors.red
-                                    : Colors.white),
-                        onPressed: () => setState(() {
-                          if (_selectedIndex.contains(index)) {
-                            _selectedIndex.remove(index);
-                          } else {
-                            _selectedIndex.add(index);
-                            final song = Songdb().addsongdata(dataModel[index]);
-                            print(song);
-                          }
-
-                          // print(_selectedIndex);
-                        }),
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const SizedBox();
-                },
-                itemCount: dataModel.length),
-          )
+          const SizedBox(height: 350, child: FavoriteButtonwidget())
         ],
       ),
     );

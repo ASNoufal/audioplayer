@@ -21,4 +21,8 @@ class DataModel {
       required this.url}) {
     id = DateTime.now().microsecondsSinceEpoch.toString();
   }
+  @override
+  String toString() {
+    return "$authorname  $songname";
+  }
 }
