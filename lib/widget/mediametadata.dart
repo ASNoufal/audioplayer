@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class MediaMetaData extends StatelessWidget {
   const MediaMetaData(
@@ -17,7 +18,7 @@ class MediaMetaData extends StatelessWidget {
       children: [
         DecoratedBox(
           decoration: BoxDecoration(
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                   color: Colors.black12, offset: Offset(2, 4), blurRadius: 4)
             ],
@@ -25,11 +26,11 @@ class MediaMetaData extends StatelessWidget {
           ),
           child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                imageurl,
-                fit: BoxFit.cover,
+              child: CachedNetworkImage(
+                imageUrl: imageurl,
                 height: 300,
                 width: 300,
+                fit: BoxFit.cover,
               )),
         ),
         Text(
@@ -40,7 +41,7 @@ class MediaMetaData extends StatelessWidget {
         ),
         Text(
           artist,
-          style: TextStyle(color: Colors.grey, fontSize: 20),
+          style: const TextStyle(color: Colors.grey, fontSize: 20),
           textAlign: TextAlign.center,
         )
       ],

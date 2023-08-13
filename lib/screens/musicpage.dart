@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:audio_player/kvalues.dart';
 import 'package:audio_player/model/datamodel.dart';
 import 'package:audio_player/widget/controlbutton.dart';
+import 'package:audio_player/widget/mediametadata.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:rxdart/rxdart.dart';
 
 class MusicPage extends StatefulWidget {
@@ -33,10 +35,14 @@ class _MusicPageState extends State<MusicPage> {
 
   @override
   void initState() {
-    _audioPlayer = AudioPlayer()
-      ..setAsset(
-          "assets/songsmp3/Aise Kyun (Ghazal Version)_192(Ghantalele.com).mp3");
+    _audioPlayer = AudioPlayer()..setAsset(dataModel[widget.indexofsong].url);
+    // init();
     super.initState();
+  }
+
+  Future<void> init() async {
+    await _audioPlayer.setLoopMode(LoopMode.all);
+    await _audioPlayer.setAudioSource(audios);
   }
 
   @override
@@ -64,6 +70,22 @@ class _MusicPageState extends State<MusicPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              StreamBuilder(
+                  stream: _audioPlayer.sequenceStateStream,
+                  builder: (context, snapshot) {
+                    final state = snapshot.data;
+                    if (state?.sequence.isEmpty ?? true) {
+                      return SizedBox();
+                    } else {
+                      return MediaMetaData(
+                          imageurl: dataModel[widget.indexofsong].songpic,
+                          title: dataModel[widget.indexofsong].songname,
+                          artist: dataModel[widget.indexofsong].authorname);
+                    }
+                  }),
+              SizedBox(
+                height: 20,
+              ),
               StreamBuilder<PositionData>(
                   stream: _positionDataStream,
                   builder: ((context, snapshot) {
@@ -84,7 +106,7 @@ class _MusicPageState extends State<MusicPage> {
                     );
                   })),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Control(audioPlayer: _audioPlayer)
             ],

@@ -1,6 +1,8 @@
 import 'package:audio_player/model/datamodel.dart';
 import 'package:audio_player/model/datamodel.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
 const kdash =
     TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold);
@@ -61,74 +63,95 @@ List<DataModel> dataModel = [
       url: "assets/songsmp3/We-Are-One-(Ole-Ola)(PaglaSongs).mp3"),
 ];
 
-// List<Audio> audios = <Audio>[
-//   Audio(dataModel[0].url,
-//       metas: Metas(
-//         id: '1',
-//         title: dataModel[0].songname,
-//         artist: dataModel[0].authorname,
-//         image: MetasImage.asset(dataModel[0].songpic),
-//       )),
-//   Audio(dataModel[1].url,
-//       metas: Metas(
-//           id: '2',
-//           title: dataModel[1].songname,
-//           artist: dataModel[1].authorname,
-//           image: MetasImage.asset(dataModel[1].songpic))),
-//   Audio(dataModel[2].url,
-//       metas: Metas(
-//         id: '3',
-//         title: dataModel[2].songname,
-//         artist: dataModel[2].authorname,
-//         image: MetasImage.asset(dataModel[2].songpic),
-//       )),
-//   Audio(dataModel[3].url,
-//       metas: Metas(
-//         id: '4',
-//         title: dataModel[3].songname,
-//         artist: dataModel[3].authorname,
-//         image: MetasImage.asset(dataModel[3].songpic),
-//       )),
-//   Audio(dataModel[4].url,
-//       metas: Metas(
-//         id: '5',
-//         title: dataModel[4].songname,
-//         artist: dataModel[4].authorname,
-//         image: MetasImage.asset(dataModel[4].songpic),
-//       )),
-//   Audio(dataModel[5].url,
-//       metas: Metas(
-//         id: '6',
-//         title: dataModel[5].songname,
-//         artist: dataModel[5].authorname,
-//         image: MetasImage.asset(dataModel[5].songpic),
-//       )),
-//   Audio(dataModel[6].url,
-//       metas: Metas(
-//         id: '7',
-//         title: dataModel[6].songname,
-//         artist: dataModel[6].authorname,
-//         image: MetasImage.asset(dataModel[6].songpic),
-//       )),
-//   Audio(dataModel[7].url,
-//       metas: Metas(
-//         id: '8',
-//         title: dataModel[7].songname,
-//         artist: dataModel[7].authorname,
-//         image: MetasImage.asset(dataModel[7].songpic),
-//       )),
-//   Audio(dataModel[8].url,
-//       metas: Metas(
-//         id: '9',
-//         title: dataModel[8].songname,
-//         artist: dataModel[8].authorname,
-//         image: MetasImage.asset(dataModel[8].songpic),
-//       )),
-//   Audio(dataModel[9].url,
-//       metas: Metas(
-//         id: '10',
-//         title: dataModel[9].songname,
-//         artist: dataModel[9].authorname,
-//         image: MetasImage.asset(dataModel[9].songpic),
-//       )),
-// ];
+final audios = ConcatenatingAudioSource(children: [
+  AudioSource.uri(
+    Uri.parse(dataModel[0].songpic),
+    tag: MediaItem(
+      id: '1',
+      title: dataModel[0].songname,
+      artist: dataModel[0].authorname,
+      artUri: Uri.parse(dataModel[0].url),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse(dataModel[1].songpic),
+    tag: MediaItem(
+      id: '2',
+      title: dataModel[1].songname,
+      artist: dataModel[1].authorname,
+      artUri: Uri.parse(dataModel[1].url),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse(dataModel[2].songpic),
+    tag: MediaItem(
+      id: '3',
+      title: dataModel[2].songname,
+      artist: dataModel[2].authorname,
+      artUri: Uri.parse(dataModel[2].url),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse(dataModel[3].songpic),
+    tag: MediaItem(
+      id: '4',
+      title: dataModel[3].songname,
+      artist: dataModel[3].authorname,
+      artUri: Uri.parse(dataModel[3].url),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse(dataModel[4].songpic),
+    tag: MediaItem(
+      id: '5',
+      title: dataModel[4].songname,
+      artist: dataModel[4].authorname,
+      artUri: Uri.parse(dataModel[4].url),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse(dataModel[5].songpic),
+    tag: MediaItem(
+      id: '6',
+      title: dataModel[5].songname,
+      artist: dataModel[5].authorname,
+      artUri: Uri.parse(dataModel[5].url),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse(dataModel[6].songpic),
+    tag: MediaItem(
+      id: '7',
+      title: dataModel[6].songname,
+      artist: dataModel[6].authorname,
+      artUri: Uri.parse(dataModel[6].url),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse(dataModel[7].songpic),
+    tag: MediaItem(
+      id: '8',
+      title: dataModel[7].songname,
+      artist: dataModel[7].authorname,
+      artUri: Uri.parse(dataModel[7].url),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse(dataModel[8].songpic),
+    tag: MediaItem(
+      id: '9',
+      title: dataModel[8].songname,
+      artist: dataModel[8].authorname,
+      artUri: Uri.parse(dataModel[8].url),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse(dataModel[9].songpic),
+    tag: MediaItem(
+      id: '10',
+      title: dataModel[9].songname,
+      artist: dataModel[9].authorname,
+      artUri: Uri.parse(dataModel[9].url),
+    ),
+  ),
+]);
