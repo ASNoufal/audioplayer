@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:audio_player/kvalues.dart';
 import 'package:audio_player/model/datamodel.dart';
 import 'package:audio_player/widget/controlbutton.dart';
@@ -35,14 +33,23 @@ class _MusicPageState extends State<MusicPage> {
 
   @override
   void initState() {
-    _audioPlayer = AudioPlayer()..setAsset(dataModel[widget.indexofsong].url);
-    // init();
+    _audioPlayer = AudioPlayer();
+    init();
     super.initState();
   }
 
   Future<void> init() async {
-    await _audioPlayer.setLoopMode(LoopMode.all);
-    await _audioPlayer.setAudioSource(audios);
+    try {
+      await _audioPlayer.setLoopMode(LoopMode.all);
+    } catch (e) {
+      print("error $e");
+    }
+
+    try {
+      await _audioPlayer.setAudioSource(audios);
+    } catch (e) {
+      print("Error loading audio source: $e");
+    }
   }
 
   @override
@@ -70,20 +77,22 @@ class _MusicPageState extends State<MusicPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              StreamBuilder(
-                  stream: _audioPlayer.sequenceStateStream,
-                  builder: (context, snapshot) {
-                    final state = snapshot.data;
-                    if (state?.sequence.isEmpty ?? true) {
-                      return SizedBox();
-                    } else {
-                      return MediaMetaData(
-                          imageurl: dataModel[widget.indexofsong].songpic,
-                          title: dataModel[widget.indexofsong].songname,
-                          artist: dataModel[widget.indexofsong].authorname);
-                    }
-                  }),
-              SizedBox(
+              // StreamBuilder<SequenceState?>(
+              //   stream: _audioPlayer.sequenceStateStream,
+              //   builder: (context, snapshot) {
+              //     final state = snapshot.data;
+              //     if (state?.sequence.isEmpty ?? true) {
+              //       return const SizedBox();
+              //     }
+              //     final metadata = state!.currentSource!.tag as MediaItem;
+              //     return MediaMetaData(
+              //       imageurl: metadata.artUri.toString(),
+              //       title: metadata.title,
+              //       artist: metadata.artist ?? " ",
+              //     );
+              //   },
+              // ),
+              const SizedBox(
                 height: 20,
               ),
               StreamBuilder<PositionData>(
@@ -105,7 +114,7 @@ class _MusicPageState extends State<MusicPage> {
                       onSeek: _audioPlayer.seek,
                     );
                   })),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Control(audioPlayer: _audioPlayer)

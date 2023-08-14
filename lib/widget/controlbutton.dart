@@ -17,7 +17,7 @@ class Control extends StatelessWidget {
                   audioPlayer.position + const Duration(seconds: -10);
               audioPlayer.seek(newPosition);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.skip_previous_rounded,
               size: 35,
               color: Colors.white,
@@ -53,7 +53,7 @@ class Control extends StatelessWidget {
                   audioPlayer.position + const Duration(seconds: 10);
               audioPlayer.seek(newPosition);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.skip_next_rounded,
               size: 35,
               color: Colors.white,

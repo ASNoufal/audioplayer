@@ -62,96 +62,96 @@ List<DataModel> dataModel = [
       songpic: "assets/songsSS/We_Are_One_cover.png",
       url: "assets/songsmp3/We-Are-One-(Ole-Ola)(PaglaSongs).mp3"),
 ];
-
 final audios = ConcatenatingAudioSource(children: [
   AudioSource.uri(
-    Uri.parse(dataModel[0].songpic),
+    Uri.parse("https://dns4.pendusaab.com/download/128k-dmhol/Chayapattu.mp3"),
     tag: MediaItem(
-      id: '1',
-      title: dataModel[0].songname,
-      artist: dataModel[0].authorname,
-      artUri: Uri.parse(dataModel[0].url),
+      id: '0',
+      title: "Chayappattu",
+      artist: 'Sithara',
+      artUri: Uri.parse(
+          "https://static.wixstatic.com/media/1c6628_149bb6d8ab924044b6590b158ff7e326~mv2.jpg/v1/crop/x_308,y_7,w_2363,h_1507/fill/w_440,h_281,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Mojo%20Rising_Dubai_Poster_31.jpg"),
     ),
   ),
-  AudioSource.uri(
-    Uri.parse(dataModel[1].songpic),
-    tag: MediaItem(
-      id: '2',
-      title: dataModel[1].songname,
-      artist: dataModel[1].authorname,
-      artUri: Uri.parse(dataModel[1].url),
-    ),
-  ),
-  AudioSource.uri(
-    Uri.parse(dataModel[2].songpic),
-    tag: MediaItem(
-      id: '3',
-      title: dataModel[2].songname,
-      artist: dataModel[2].authorname,
-      artUri: Uri.parse(dataModel[2].url),
-    ),
-  ),
-  AudioSource.uri(
-    Uri.parse(dataModel[3].songpic),
-    tag: MediaItem(
-      id: '4',
-      title: dataModel[3].songname,
-      artist: dataModel[3].authorname,
-      artUri: Uri.parse(dataModel[3].url),
-    ),
-  ),
-  AudioSource.uri(
-    Uri.parse(dataModel[4].songpic),
-    tag: MediaItem(
-      id: '5',
-      title: dataModel[4].songname,
-      artist: dataModel[4].authorname,
-      artUri: Uri.parse(dataModel[4].url),
-    ),
-  ),
-  AudioSource.uri(
-    Uri.parse(dataModel[5].songpic),
-    tag: MediaItem(
-      id: '6',
-      title: dataModel[5].songname,
-      artist: dataModel[5].authorname,
-      artUri: Uri.parse(dataModel[5].url),
-    ),
-  ),
-  AudioSource.uri(
-    Uri.parse(dataModel[6].songpic),
-    tag: MediaItem(
-      id: '7',
-      title: dataModel[6].songname,
-      artist: dataModel[6].authorname,
-      artUri: Uri.parse(dataModel[6].url),
-    ),
-  ),
-  AudioSource.uri(
-    Uri.parse(dataModel[7].songpic),
-    tag: MediaItem(
-      id: '8',
-      title: dataModel[7].songname,
-      artist: dataModel[7].authorname,
-      artUri: Uri.parse(dataModel[7].url),
-    ),
-  ),
-  AudioSource.uri(
-    Uri.parse(dataModel[8].songpic),
-    tag: MediaItem(
-      id: '9',
-      title: dataModel[8].songname,
-      artist: dataModel[8].authorname,
-      artUri: Uri.parse(dataModel[8].url),
-    ),
-  ),
-  AudioSource.uri(
-    Uri.parse(dataModel[9].songpic),
-    tag: MediaItem(
-      id: '10',
-      title: dataModel[9].songname,
-      artist: dataModel[9].authorname,
-      artUri: Uri.parse(dataModel[9].url),
-    ),
-  ),
+  // AudioSource.uri(
+  //   Uri.parse(dataModel[1].url),
+  //   tag: MediaItem(
+  //     id: '2',
+  //     title: dataModel[1].songname,
+  //     artist: dataModel[1].authorname,
+  //     artUri: Uri.parse(dataModel[1].songpic),
+  //   ),
+  // ),
+  // AudioSource.uri(
+  //   Uri.parse(dataModel[2].url),
+  //   tag: MediaItem(
+  //     id: '3',
+  //     title: dataModel[2].songname,
+  //     artist: dataModel[2].authorname,
+  //     artUri: Uri.parse(dataModel[2].songpic),
+  //   ),
+  // ),
+  // AudioSource.uri(
+  //   Uri.parse(dataModel[3].url),
+  //   tag: MediaItem(
+  //     id: '4',
+  //     title: dataModel[3].songname,
+  //     artist: dataModel[3].authorname,
+  //     artUri: Uri.parse(dataModel[3].songpic),
+  //   ),
+  // ),
+  // AudioSource.uri(
+  //   Uri.parse(dataModel[4].url),
+  //   tag: MediaItem(
+  //     id: '5',
+  //     title: dataModel[4].songname,
+  //     artist: dataModel[4].authorname,
+  //     artUri: Uri.parse(dataModel[4].songpic),
+  //   ),
+  // ),
+  // AudioSource.uri(
+  //   Uri.parse(dataModel[5].url),
+  //   tag: MediaItem(
+  //     id: '6',
+  //     title: dataModel[5].songname,
+  //     artist: dataModel[5].authorname,
+  //     artUri: Uri.parse(dataModel[5].songpic),
+  //   ),
+  // ),
+  // AudioSource.uri(
+  //   Uri.parse(dataModel[6].url),
+  //   tag: MediaItem(
+  //     id: '7',
+  //     title: dataModel[6].songname,
+  //     artist: dataModel[6].authorname,
+  //     artUri: Uri.parse(dataModel[6].songpic),
+  //   ),
+  // ),
+  // AudioSource.uri(
+  //   Uri.parse(dataModel[7].url),
+  //   tag: MediaItem(
+  //     id: '8',
+  //     title: dataModel[7].songname,
+  //     artist: dataModel[7].authorname,
+  //     artUri: Uri.parse(dataModel[7].songpic),
+  //   ),
+  // ),
+  // AudioSource.uri(
+  //   Uri.parse(dataModel[8].url),
+  //   tag: MediaItem(
+  //     id: '9',
+  //     title: dataModel[8].songname,
+  //     artist: dataModel[8].authorname,
+  //     artUri: Uri.parse(dataModel[8].songpic),
+  //   ),
+  // ),
+  // AudioSource.uri(
+  //   Uri.parse(dataModel[9].url),
+  //   tag: MediaItem(
+  //     id: '10',
+  //     title: dataModel[9].songname,
+  //     artist: dataModel[9].authorname,
+  //     artUri: Uri.parse(dataModel[9].songpic),
+  //   ),
+  // ),
 ]);
