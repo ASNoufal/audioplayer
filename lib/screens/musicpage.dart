@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:audio_player/kvalues.dart';
 import 'package:audio_player/model/datamodel.dart';
 import 'package:audio_player/widget/controlbutton.dart';
@@ -65,62 +67,69 @@ class _MusicPageState extends State<MusicPage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
         ),
-        body: Container(
-          padding: const EdgeInsets.all(20),
-          height: double.infinity,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF144771), Color(0xFF071A2C)],
+        body: Stack(children: [
+          Container(
+            padding: const EdgeInsets.all(20),
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      dataModel[widget.indexofsong].songpic,
+                    ),
+                    fit: BoxFit.cover)),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  StreamBuilder<SequenceState?>(
+                    stream: _audioPlayer.sequenceStateStream,
+                    builder: (context, snapshot) {
+                      final state = snapshot.data;
+                      if (state?.sequence.isEmpty ?? true) {
+                        return const SizedBox();
+                      }
+                      final metadata = state!.currentSource!.tag as MediaItem;
+                      return MediaMetaData(
+                        imageurl: metadata.artUri.toString(),
+                        title: metadata.title,
+                        artist: metadata.artist ?? " ",
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  StreamBuilder<PositionData>(
+                      stream: _positionDataStream,
+                      builder: ((context, snapshot) {
+                        final positionData = snapshot.data;
+                        return ProgressBar(
+                          barHeight: 3,
+                          barCapShape: BarCapShape.round,
+                          baseBarColor: Colors.grey[600],
+                          bufferedBarColor: Colors.grey,
+                          thumbColor: Colors.white,
+                          progressBarColor: Colors.white,
+                          timeLabelTextStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 13),
+                          progress: positionData?.position ?? Duration.zero,
+                          buffered:
+                              positionData?.bufferposition ?? Duration.zero,
+                          total: positionData?.duration ?? Duration.zero,
+                          onSeek: _audioPlayer.seek,
+                        );
+                      })),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Control(audioPlayer: _audioPlayer)
+                ],
+              ),
             ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              StreamBuilder<SequenceState?>(
-                stream: _audioPlayer.sequenceStateStream,
-                builder: (context, snapshot) {
-                  final state = snapshot.data;
-                  if (state?.sequence.isEmpty ?? true) {
-                    return const SizedBox();
-                  }
-                  final metadata = state!.currentSource!.tag as MediaItem;
-                  return MediaMetaData(
-                    imageurl: metadata.artUri.toString(),
-                    title: metadata.title,
-                    artist: metadata.artist ?? " ",
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              StreamBuilder<PositionData>(
-                  stream: _positionDataStream,
-                  builder: ((context, snapshot) {
-                    final positionData = snapshot.data;
-                    return ProgressBar(
-                      barHeight: 3,
-                      barCapShape: BarCapShape.round,
-                      baseBarColor: Colors.grey[600],
-                      bufferedBarColor: Colors.grey,
-                      thumbColor: Colors.white,
-                      progressBarColor: Colors.white,
-                      timeLabelTextStyle: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 13),
-                      progress: positionData?.position ?? Duration.zero,
-                      buffered: positionData?.bufferposition ?? Duration.zero,
-                      total: positionData?.duration ?? Duration.zero,
-                      onSeek: _audioPlayer.seek,
-                    );
-                  })),
-              const SizedBox(
-                height: 10,
-              ),
-              Control(audioPlayer: _audioPlayer)
-            ],
-          ),
-        ));
+        ]));
   }
 }
 
