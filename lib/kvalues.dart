@@ -69,89 +69,98 @@ final audios = ConcatenatingAudioSource(children: [
       id: '0',
       title: "Chayappattu",
       artist: 'Sithara',
-      artUri: Uri.parse(
-          "https://static.wixstatic.com/media/1c6628_149bb6d8ab924044b6590b158ff7e326~mv2.jpg/v1/crop/x_308,y_7,w_2363,h_1507/fill/w_440,h_281,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Mojo%20Rising_Dubai_Poster_31.jpg"),
+      artUri: Uri.parse("https://dns2.pendusaab.com/thumbmed/25991521.jpg"),
     ),
   ),
-  // AudioSource.uri(
-  //   Uri.parse(dataModel[1].url),
-  //   tag: MediaItem(
-  //     id: '2',
-  //     title: dataModel[1].songname,
-  //     artist: dataModel[1].authorname,
-  //     artUri: Uri.parse(dataModel[1].songpic),
-  //   ),
-  // ),
-  // AudioSource.uri(
-  //   Uri.parse(dataModel[2].url),
-  //   tag: MediaItem(
-  //     id: '3',
-  //     title: dataModel[2].songname,
-  //     artist: dataModel[2].authorname,
-  //     artUri: Uri.parse(dataModel[2].songpic),
-  //   ),
-  // ),
-  // AudioSource.uri(
-  //   Uri.parse(dataModel[3].url),
-  //   tag: MediaItem(
-  //     id: '4',
-  //     title: dataModel[3].songname,
-  //     artist: dataModel[3].authorname,
-  //     artUri: Uri.parse(dataModel[3].songpic),
-  //   ),
-  // ),
-  // AudioSource.uri(
-  //   Uri.parse(dataModel[4].url),
-  //   tag: MediaItem(
-  //     id: '5',
-  //     title: dataModel[4].songname,
-  //     artist: dataModel[4].authorname,
-  //     artUri: Uri.parse(dataModel[4].songpic),
-  //   ),
-  // ),
-  // AudioSource.uri(
-  //   Uri.parse(dataModel[5].url),
-  //   tag: MediaItem(
-  //     id: '6',
-  //     title: dataModel[5].songname,
-  //     artist: dataModel[5].authorname,
-  //     artUri: Uri.parse(dataModel[5].songpic),
-  //   ),
-  // ),
-  // AudioSource.uri(
-  //   Uri.parse(dataModel[6].url),
-  //   tag: MediaItem(
-  //     id: '7',
-  //     title: dataModel[6].songname,
-  //     artist: dataModel[6].authorname,
-  //     artUri: Uri.parse(dataModel[6].songpic),
-  //   ),
-  // ),
-  // AudioSource.uri(
-  //   Uri.parse(dataModel[7].url),
-  //   tag: MediaItem(
-  //     id: '8',
-  //     title: dataModel[7].songname,
-  //     artist: dataModel[7].authorname,
-  //     artUri: Uri.parse(dataModel[7].songpic),
-  //   ),
-  // ),
-  // AudioSource.uri(
-  //   Uri.parse(dataModel[8].url),
-  //   tag: MediaItem(
-  //     id: '9',
-  //     title: dataModel[8].songname,
-  //     artist: dataModel[8].authorname,
-  //     artUri: Uri.parse(dataModel[8].songpic),
-  //   ),
-  // ),
-  // AudioSource.uri(
-  //   Uri.parse(dataModel[9].url),
-  //   tag: MediaItem(
-  //     id: '10',
-  //     title: dataModel[9].songname,
-  //     artist: dataModel[9].authorname,
-  //     artUri: Uri.parse(dataModel[9].songpic),
-  //   ),
-  // ),
+  AudioSource.uri(
+    Uri.parse(
+        "https://ghantalele.com/uploads/files/data-19/9493/Aise%20Kyun_192(Ghantalele.com).mp3"),
+    tag: MediaItem(
+      id: '1',
+      title: dataModel[1].songname,
+      artist: dataModel[1].authorname,
+      artUri: Uri.parse("https://ghantalele.com/uploads/thumbs/cat/1530_2.jpg"),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse("https://pagalnew.com/download128/34682"),
+    tag: MediaItem(
+      id: '3',
+      title: dataModel[2].songname,
+      artist: dataModel[2].authorname,
+      artUri: Uri.parse(
+          "https://pagalnew.com/coverimages/Let-Me-Down-Slowly-Alec-Benjamin-500-500.jpg"),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse(
+        "https://dns4.pendusaab.com/download/128k-dkovw/Life-Of-Ram-(From-%22Jaanu%22).mp3"),
+    tag: MediaItem(
+      id: '4',
+      title: dataModel[3].songname,
+      artist: dataModel[3].authorname,
+      artUri: Uri.parse("https://tamilpaatu.com/i/wp/96-2018.webp"),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse("https://paglasongs.com/files/download/id/13968"),
+    tag: MediaItem(
+      id: '5',
+      title: dataModel[4].songname,
+      artist: dataModel[4].authorname,
+      artUri:
+          Uri.parse("https://paglasongs.com/uploads/thumb/sft28/13968_4.jpg"),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse(
+        "https://files.thenaatsharif.com/downloads/maher-zain/rahmatun-lil-alameen.mp3"),
+    tag: MediaItem(
+      id: '6',
+      title: dataModel[5].songname,
+      artist: dataModel[5].authorname,
+      artUri: Uri.parse(
+          "https://img.wynk.in/unsafe/248x248/filters:no_upscale():strip_exif():format(webp)/http://s3-ap-south-1.amazonaws.com/wynk-music-cms/srch_orchard/music/20220412103411_196626693532/1649775010/srch_orchard_196626693532_QM4TX2236659.jpg"),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse("https://pagalworldi.com/files/download/id/3086"),
+    tag: MediaItem(
+      id: '7',
+      title: dataModel[6].songname,
+      artist: dataModel[6].authorname,
+      artUri: Uri.parse(
+          "https://pagalworldi.com/siteuploads/thumb/sft7/3086_4.jpg"),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse("https://www.pagalworldl.com/files/download/id/19799"),
+    tag: MediaItem(
+      id: '8',
+      title: dataModel[7].songname,
+      artist: dataModel[7].authorname,
+      artUri: Uri.parse(
+          "https://www.pagalworldl.com/uploads/thumb/sft40/19799_4.jpg"),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse("https://djmaza.live/files/download/id/14077"),
+    tag: MediaItem(
+      id: '9',
+      title: dataModel[8].songname,
+      artist: dataModel[8].authorname,
+      artUri: Uri.parse(
+          "https://djmaza.live/siteuploads/thumb/sft29/14077_resize2x_200x200.webp"),
+    ),
+  ),
+  AudioSource.uri(
+    Uri.parse("https://paglasongs.com/files/download/id/10153"),
+    tag: MediaItem(
+      id: '10',
+      title: dataModel[9].songname,
+      artist: dataModel[9].authorname,
+      artUri:
+          Uri.parse("https://paglasongs.com/uploads/thumb/sft21/10153_4.jpg"),
+    ),
+  ),
 ]);

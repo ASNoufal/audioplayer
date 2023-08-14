@@ -12,6 +12,13 @@ class Control extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
+            onPressed: audioPlayer.seekToPrevious,
+            icon: const Icon(
+              Icons.skip_previous,
+              size: 35,
+              color: Colors.white,
+            )),
+        IconButton(
             onPressed: () {
               final newPosition =
                   audioPlayer.position + const Duration(seconds: -10);
@@ -55,6 +62,13 @@ class Control extends StatelessWidget {
             },
             icon: const Icon(
               Icons.skip_next_rounded,
+              size: 35,
+              color: Colors.white,
+            )),
+        IconButton(
+            onPressed: audioPlayer.seekToNext,
+            icon: const Icon(
+              Icons.skip_next,
               size: 35,
               color: Colors.white,
             ))

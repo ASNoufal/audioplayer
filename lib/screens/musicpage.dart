@@ -77,21 +77,21 @@ class _MusicPageState extends State<MusicPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // StreamBuilder<SequenceState?>(
-              //   stream: _audioPlayer.sequenceStateStream,
-              //   builder: (context, snapshot) {
-              //     final state = snapshot.data;
-              //     if (state?.sequence.isEmpty ?? true) {
-              //       return const SizedBox();
-              //     }
-              //     final metadata = state!.currentSource!.tag as MediaItem;
-              //     return MediaMetaData(
-              //       imageurl: metadata.artUri.toString(),
-              //       title: metadata.title,
-              //       artist: metadata.artist ?? " ",
-              //     );
-              //   },
-              // ),
+              StreamBuilder<SequenceState?>(
+                stream: _audioPlayer.sequenceStateStream,
+                builder: (context, snapshot) {
+                  final state = snapshot.data;
+                  if (state?.sequence.isEmpty ?? true) {
+                    return const SizedBox();
+                  }
+                  final metadata = state!.currentSource!.tag as MediaItem;
+                  return MediaMetaData(
+                    imageurl: metadata.artUri.toString(),
+                    title: metadata.title,
+                    artist: metadata.artist ?? " ",
+                  );
+                },
+              ),
               const SizedBox(
                 height: 20,
               ),
