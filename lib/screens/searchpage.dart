@@ -1,47 +1,79 @@
+import 'package:audio_player/kvalues.dart';
 import 'package:audio_player/model/datamodel.dart';
-import 'package:audio_player/screens/musicpage.dart';
 import 'package:flutter/material.dart';
 
-class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
+class SearchPageScreen extends StatefulWidget {
+  const SearchPageScreen({super.key});
 
+  @override
+  State<SearchPageScreen> createState() => _SearchPageScreenState();
+}
+
+class _SearchPageScreenState extends State<SearchPageScreen> {
+  List<DataModel> data = dataModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black12,
-        title: Text("Search"),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(21.0),
-            child: TextFormField(
-              style: TextStyle(
-                color: Colors.white,
-              ),
-              decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  prefixIcon: const Icon(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(21.0),
+              child: TextFormField(
+                textCapitalization: TextCapitalization.words,
+                cursorColor: Colors.white,
+                style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
+                onChanged: (value) {
+                  data = dataModel
+                      .where((element) => element.songname.contains(value))
+                      .toList();
+
+                  setState(() {});
+                },
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(
                     Icons.search,
-                    size: 30,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
-                  hintText: ("What do yo want to lisen to?"),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(20))),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  disabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                ),
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView.builder(itemBuilder: (context, index) {
-              return Container();
-            }),
-          )
-        ],
+            Expanded(
+                child: ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: ((context, index) {
+                      return InkWell(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage(
+                              data[index].songpic,
+                            ),
+                          ),
+                          title: Text(data[index].songname, style: kwhite),
+                          subtitle: Text(
+                            data[index].authorname,
+                            style: const TextStyle(color: Colors.white38),
+                          ),
+                        ),
+                      );
+                    })))
+          ],
+        ),
       ),
     );
   }
