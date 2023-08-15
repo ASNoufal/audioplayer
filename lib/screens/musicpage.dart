@@ -48,7 +48,7 @@ class _MusicPageState extends State<MusicPage> {
     }
 
     try {
-      await _audioPlayer.setAudioSource(audios);
+      await _audioPlayer.setAudioSource(audios[widget.indexofsong]);
     } catch (e) {
       print("Error loading audio source: $e");
     }

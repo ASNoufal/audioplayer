@@ -41,7 +41,7 @@ dependencies:
   hive_flutter: ^1.1.0
   hive_generator: ^2.0.0
   just_audio: ^0.9.30
-  just_audio_background: ^0.0.1-beta.10
+  just_audio_background: 0.0.1-beta.7
   rxdart: ^0.27.7
   cached_network_image: ^3.2.3
 dev_dependencies:
