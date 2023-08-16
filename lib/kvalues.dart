@@ -9,54 +9,64 @@ const kdash =
 const kwhite = TextStyle(color: Colors.white);
 List<DataModel> dataModel = [
   DataModel(
+      id: "0",
       authorname: 'Sithara',
       songname: "Chayappattu",
       songpic: "assets/songsSS/chayapattu.jpeg",
       url:
           "assets/songsmp3/Chayapattu-Project-Malabaricus-Sithara-Krishnakumar.mp3"),
   DataModel(
+      id: "1",
       authorname: "Ghazal ",
       songname: "Aise Kyun(Ghazal Version)",
       songpic: "assets/songsSS/ee39c9d3-177c-4045-b0b2-c1e3df597370_1024.jpeg",
       url:
           "assets/songsmp3/Aise Kyun (Ghazal Version)_192(Ghantalele.com).mp3"),
   DataModel(
+      id: "2",
       authorname: "Nappu",
       songname: "Let Me Down Slowly",
       songpic: "assets/songsSS/letme.jpeg",
       url: "assets/songsmp3/Let Me Down Slowly Alec Benjamin 128 Kbps.mp3"),
   DataModel(
+      id: "3",
       authorname: "suku",
       songname: "Life of ram",
       songpic: "assets/songsSS/life of ram.jpeg",
       url: "assets/songsmp3/The_Life_Of_Ram-MassTamilan.com.mp3"),
   DataModel(
+      id: "4",
       authorname: "Eminem",
       songname: "Mocking bird",
       songpic: "assets/songsSS/mocking bird.jpeg",
       url: "assets/songsmp3/Mockingbird(PaglaSongs).mp3"),
   DataModel(
+      id: "5",
       authorname: "kadar",
       songname: "Rahmatun Lil Alameen",
       songpic: "assets/songsSS/rahmatun.jpeg",
       url: "assets/songsmp3/rahmatun-lil-alameen.mp3"),
   DataModel(
+      id: "6",
       authorname: "ganu",
       songname: "Rap God",
       songpic: "assets/songsSS/rapgod.jpeg",
       url: "assets/songsmp3/Rap-God---Eminem-320(PagalWorld).mp3"),
   DataModel(
+      id: "7",
       authorname: "jabaz",
       songname: "Sulaikha Manzil",
       songpic:
           "assets/songsSS/Sulaikha-Manzil-Malayalam-2023-20230509171010-500x500.jpeg",
       url: "assets/songsmp3/Haal-Aake-Maarunne-MassTamilan.dev.mp3"),
   DataModel(
+      id: "8",
       authorname: "ajml",
       songname: "Urukumen Azhalinu Thanalu",
       songpic: "assets/songsSS/urukumen azhalinu.jpeg",
       url: "assets/songsmp3/Urukumen Azhalinu Thanalu Lofi_64-(DJPunjab).mp3"),
   DataModel(
+      id: "9",
       authorname: "pitbull",
       songname: "We are one by pitbull",
       songpic: "assets/songsSS/We_Are_One_cover.png",

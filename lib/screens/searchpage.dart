@@ -1,5 +1,6 @@
 import 'package:audio_player/kvalues.dart';
 import 'package:audio_player/model/datamodel.dart';
+import 'package:audio_player/screens/musicpage.dart';
 import 'package:flutter/material.dart';
 
 class SearchPageScreen extends StatefulWidget {
@@ -56,7 +57,18 @@ class _SearchPageScreenState extends State<SearchPageScreen> {
                 child: ListView.builder(
                     itemCount: data.length,
                     itemBuilder: ((context, index) {
+                      final datas = int.tryParse(data[index].id!);
+
                       return InkWell(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (builder) {
+                            return MusicPage(
+                                dataModel: data,
+                                indexofsong:
+                                    datas!); // error in this code need to check);
+                          }));
+                        },
                         child: ListTile(
                           leading: CircleAvatar(
                             radius: 40,

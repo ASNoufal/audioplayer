@@ -21,7 +21,8 @@ class DataModelAdapter extends TypeAdapter<DataModel> {
       songname: fields[0] as String,
       songpic: fields[2] as String,
       url: fields[3] as String,
-    )..id = fields[4] as String?;
+      id: fields[4] as String?,
+    );
   }
 
   @override

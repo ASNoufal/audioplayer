@@ -18,9 +18,9 @@ class DataModel {
       {required this.authorname,
       required this.songname,
       required this.songpic,
-      required this.url}) {
-    id = DateTime.now().microsecondsSinceEpoch.toString();
-  }
+      required this.url,
+      this.id});
+
   @override
   String toString() {
     return "$authorname  $songname";
