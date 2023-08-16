@@ -35,19 +35,19 @@ class _SearchPageScreenState extends State<SearchPageScreen> {
 
                   setState(() {});
                 },
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   prefixIcon: Icon(
                     Icons.search,
-                    color: Colors.white,
+                    color: Colors.grey.shade500,
                   ),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(color: Colors.grey.shade600),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(color: Colors.grey.shade600),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: Colors.grey.shade600),
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                 ),

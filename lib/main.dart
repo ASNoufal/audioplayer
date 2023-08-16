@@ -1,6 +1,8 @@
 import 'package:audio_player/model/datamodel.dart';
 import 'package:audio_player/screens/homepage.dart';
 import 'package:audio_player/screens/searchpage.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+
 import 'package:audio_player/settings.dart';
 import 'package:audio_player/yourlibrary.dart';
 import 'package:flutter/material.dart';
@@ -55,41 +57,55 @@ class BottomNavigatorBaritem extends StatelessWidget {
         builder: (context, index, _) {
           return Theme(
             data: ThemeData(canvasColor: Colors.transparent),
-            child: BottomNavigationBar(
-              currentIndex: index,
-              onTap: (value) {
-                BottomNavigatonBar.valueNotifier.value = value;
-              },
-              items: const [
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.home_filled,
-                      size: 35,
-                    ),
-                    label: "Home"),
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.search,
-                      size: 35,
-                    ),
-                    label: "Search"),
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.my_library_music,
-                      size: 35,
-                    ),
-                    label: "Your Library"),
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.settings_outlined,
-                      size: 35,
-                    ),
-                    label: "Settings")
-              ],
-              // mouseCursor: MaterialStateMouseCursor.textable,
-              // selectedIconTheme: const IconThemeData(color: Colors.white),
-              // unselectedItemColor: Colors.white38,
-              // selectedItemColor: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
+              child: GNav(
+                color: Colors.white,
+                activeColor: Colors.white,
+                tabBackgroundColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
+                curve: Curves.easeInOutSine,
+                tabActiveBorder:
+                    Border.all(color: Colors.grey.shade600, width: 2.5),
+
+                gap: 8,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
+                selectedIndex: index,
+                onTabChange: (value) {
+                  BottomNavigatonBar.valueNotifier.value = value;
+                },
+                tabs: const [
+                  GButton(
+                    icon: Icons.home_outlined,
+                    text: "Home",
+                    iconColor: Colors.white,
+                    textColor: Colors.grey,
+                  ),
+                  GButton(
+                    icon: Icons.search,
+                    text: "Search",
+                    iconColor: Colors.white,
+                    textColor: Colors.grey,
+                  ),
+                  GButton(
+                    icon: Icons.my_library_music,
+                    text: "Your Library",
+                    iconColor: Colors.white,
+                    textColor: Colors.grey,
+                  ),
+                  GButton(
+                    icon: Icons.settings_outlined,
+                    text: "Settings",
+                    iconColor: Colors.white,
+                    textColor: Colors.grey,
+                  )
+                ],
+                // mouseCursor: MaterialStateMouseCursor.textable,
+                // selectedIconTheme: const IconThemeData(color: Colors.white),
+                // unselectedItemColor: Colors.white38,
+                // selectedItemColor: Colors.white,
+              ),
             ),
           );
         });
