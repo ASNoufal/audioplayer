@@ -16,14 +16,7 @@ class HomePage extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Text(
-                  "Good morning",
-                  //need to add dateTime
-                  style: kdash,
-                ),
-              ),
+              Padding(padding: EdgeInsets.all(15.0), child: welcome()),
               const Spacer(),
               IconButton(
                   onPressed: () {
@@ -116,5 +109,26 @@ class HomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget welcome() {
+    final time = DateTime.now().hour;
+
+    if (time < 12) {
+      return Text(
+        "good morning",
+        style: kdash,
+      );
+    } else if (time < 16) {
+      return Text(
+        "Good Afternoon",
+        style: kdash,
+      );
+    } else {
+      return Text(
+        "Good Evening",
+        style: kdash,
+      );
+    }
   }
 }
