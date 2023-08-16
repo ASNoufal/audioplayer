@@ -4,7 +4,6 @@ import 'package:audio_player/screens/favoritepage.dart';
 import 'package:audio_player/screens/musicpage.dart';
 import 'package:audio_player/widget/favoriteButton.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -34,7 +33,7 @@ class HomePage extends StatelessWidget {
                     }));
                   },
                   icon: const Icon(
-                    Icons.favorite_outline_outlined,
+                    Icons.favorite_rounded,
                     color: Colors.white,
                   )),
               IconButton(
