@@ -4,6 +4,7 @@ import 'package:audio_player/screens/favoritepage.dart';
 import 'package:audio_player/screens/musicpage.dart';
 import 'package:audio_player/widget/favoriteButton.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
         children: [
           Row(
             children: [
-              Padding(padding: EdgeInsets.all(15.0), child: welcome()),
+              Padding(padding: const EdgeInsets.all(15.0), child: welcome()),
               const Spacer(),
               IconButton(
                   onPressed: () {
@@ -116,18 +117,21 @@ class HomePage extends StatelessWidget {
 
     if (time < 12) {
       return Text(
-        "good morning",
-        style: kdash,
+        "Good morning",
+        style: GoogleFonts.lobster(
+            color: Colors.white, textStyle: const TextStyle(fontSize: 30)),
       );
     } else if (time < 16) {
       return Text(
         "Good Afternoon",
-        style: kdash,
+        style: GoogleFonts.lobster(
+            color: Colors.white, textStyle: const TextStyle(fontSize: 30)),
       );
     } else {
       return Text(
         "Good Evening",
-        style: kdash,
+        style: GoogleFonts.lobster(
+            color: Colors.white, textStyle: const TextStyle(fontSize: 30)),
       );
     }
   }

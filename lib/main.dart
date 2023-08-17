@@ -1,5 +1,6 @@
 import 'package:audio_player/model/datamodel.dart';
 import 'package:audio_player/screens/homepage.dart';
+import 'package:audio_player/screens/nicknamescreen.dart';
 import 'package:audio_player/screens/searchpage.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -20,7 +21,7 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(DataModelAdapter().typeId)) {
     Hive.registerAdapter(DataModelAdapter());
   }
-  runApp(MaterialApp(theme: ThemeData(), home: const BottomNavigatonBar()));
+  runApp(MaterialApp(theme: ThemeData(), home: const Nicknamescreen()));
 }
 
 class BottomNavigatonBar extends StatelessWidget {
