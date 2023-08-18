@@ -24,14 +24,17 @@ Future<void> main() async {
   runApp(MaterialApp(theme: ThemeData(), home: const Nicknamescreen()));
 }
 
-class BottomNavigatonBar extends StatelessWidget {
-  const BottomNavigatonBar({super.key});
+class BottomNavigatonBars extends StatelessWidget {
+  const BottomNavigatonBars({super.key, required this.nickname});
+  final String nickname;
   static ValueNotifier<int> valueNotifier = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = const [
-      HomePage(),
+    List<Widget> items = [
+      HomePage(
+        nicknamefromnicknamepage: nickname,
+      ),
       SearchPageScreen(),
       LibraryPage(),
       SettingsPage()
@@ -54,7 +57,7 @@ class BottomNavigatorBaritem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: BottomNavigatonBar.valueNotifier,
+        valueListenable: BottomNavigatonBars.valueNotifier,
         builder: (context, index, _) {
           return Theme(
             data: ThemeData(canvasColor: Colors.transparent),
@@ -74,7 +77,7 @@ class BottomNavigatorBaritem extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
                 selectedIndex: index,
                 onTabChange: (value) {
-                  BottomNavigatonBar.valueNotifier.value = value;
+                  BottomNavigatonBars.valueNotifier.value = value;
                 },
                 tabs: const [
                   GButton(

@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.nicknamefromnicknamepage});
+  final String nicknamefromnicknamepage;
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +45,10 @@ class HomePage extends StatelessWidget {
                   "assets/songsSS/pngtree-cute-red-blue-musical-notes-music-logo-png-image_3223600.jpeg"),
               radius: 25,
             ),
-            title: const Text(
-              "NAUFAL AS",
-              style: TextStyle(
-                  color: Colors.white38, fontSize: 10, letterSpacing: 1),
+            title: Text(
+              nicknamefromnicknamepage.toUpperCase(),
+              style: const TextStyle(
+                  color: Colors.white38, fontSize: 15, letterSpacing: 1),
             ),
             subtitle: const Text(
               "Listen again",
