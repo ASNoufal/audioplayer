@@ -1,7 +1,11 @@
 import 'package:audio_player/main.dart';
 import 'package:audio_player/screens/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 class Nicknamescreen extends StatefulWidget {
   const Nicknamescreen({super.key});
@@ -11,7 +15,34 @@ class Nicknamescreen extends StatefulWidget {
 }
 
 class _NicknamescreenState extends State<Nicknamescreen> {
-  final formkey = GlobalKey<FormState>();
+  Future<File> getImageFileFromAssets(String path) async {
+    final byteData = await rootBundle.load('assets/$path');
+
+    final file = File('${(await getTemporaryDirectory()).path}/$path');
+    await file.create(recursive: true);
+    await file.writeAsBytes(byteData.buffer
+        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+    return file;
+  }
+
+  File? currentimage;
+  void opencamera() async {
+    final imagepicker = ImagePicker();
+    final pickedimage = await imagepicker.pickImage(source: ImageSource.camera);
+    if (pickedimage == null) {
+      return;
+    }
+    setState(() {
+      currentimage = File(pickedimage.path);
+      print(currentimage);
+    });
+  }
+
+  function() async {
+    return FileImage(await getImageFileFromAssets("songsSS/no image.png"));
+  }
+
   TextEditingController nicknamecontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -28,9 +59,36 @@ class _NicknamescreenState extends State<Nicknamescreen> {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.labrada(color: Colors.white, fontSize: 24),
                 ),
-                const SizedBox(
-                  height: 300,
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    radius: 60,
+                    backgroundImage: currentimage != null
+                        ? FileImage(currentimage!)
+                        : function(),
+                    child: Stack(children: [
+                      Positioned(
+                        right: 0,
+                        bottom: 0,
+                        child: CircleAvatar(
+                          backgroundColor:
+                              const Color.fromARGB(255, 41, 122, 44),
+                          child: IconButton(
+                              onPressed: opencamera,
+                              icon: const Icon(
+                                Icons.camera_alt_rounded,
+                                color: Colors.white,
+                              )),
+                        ),
+                      )
+                    ]),
+                  ),
                 ),
+                const SizedBox(
+                  height: 150,
+                ),
+
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
