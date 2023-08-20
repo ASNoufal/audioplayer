@@ -1,5 +1,4 @@
 import 'package:audio_player/main.dart';
-import 'package:audio_player/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,15 +14,28 @@ class Nicknamescreen extends StatefulWidget {
 }
 
 class _NicknamescreenState extends State<Nicknamescreen> {
-  Future<File> getImageFileFromAssets(String path) async {
-    final byteData = await rootBundle.load('assets/$path');
+  Future<String> convertAssetUrlToFileImagePath(String assetUrl) async {
+    Directory tempDir = await getTemporaryDirectory();
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString() + ".png";
+    String localFilePath = "${tempDir.path}/$fileName";
 
-    final file = File('${(await getTemporaryDirectory()).path}/$path');
-    await file.create(recursive: true);
-    await file.writeAsBytes(byteData.buffer
-        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+    ByteData data = await rootBundle.load(assetUrl);
+    List<int> bytes = data.buffer.asUint8List();
 
-    return file;
+    File localFile = File(localFilePath);
+    await localFile.writeAsBytes(bytes);
+
+    return localFilePath;
+  }
+
+  Future<ImageProvider<Object>> getImageFilePath() async {
+    if (currentimage != null) {
+      return FileImage(currentimage!);
+    } else {
+      String localpath =
+          await convertAssetUrlToFileImagePath('assets/songsSS/no image.png');
+      return FileImage(File(localpath));
+    }
   }
 
   File? currentimage;
@@ -35,12 +47,7 @@ class _NicknamescreenState extends State<Nicknamescreen> {
     }
     setState(() {
       currentimage = File(pickedimage.path);
-      print(currentimage);
     });
-  }
-
-  function() async {
-    return FileImage(await getImageFileFromAssets("songsSS/no image.png"));
   }
 
   TextEditingController nicknamecontroller = TextEditingController();
@@ -62,28 +69,34 @@ class _NicknamescreenState extends State<Nicknamescreen> {
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CircleAvatar(
-                    radius: 60,
-                    backgroundImage: currentimage != null
-                        ? FileImage(currentimage!)
-                        : function(),
-                    child: Stack(children: [
-                      Positioned(
-                        right: 0,
-                        bottom: 0,
-                        child: CircleAvatar(
-                          backgroundColor:
-                              const Color.fromARGB(255, 41, 122, 44),
-                          child: IconButton(
-                              onPressed: opencamera,
-                              icon: const Icon(
-                                Icons.camera_alt_rounded,
-                                color: Colors.white,
-                              )),
-                        ),
-                      )
-                    ]),
-                  ),
+                  child: FutureBuilder<ImageProvider>(
+                      future: getImageFilePath(),
+                      builder: (context, snapshort) {
+                        if (snapshort.connectionState ==
+                            ConnectionState.waiting) {
+                          const CircularProgressIndicator();
+                        }
+                        return CircleAvatar(
+                          radius: 60,
+                          backgroundImage: snapshort.data,
+                          child: Stack(children: [
+                            Positioned(
+                              right: 0,
+                              bottom: 0,
+                              child: CircleAvatar(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 41, 122, 44),
+                                child: IconButton(
+                                    onPressed: opencamera,
+                                    icon: const Icon(
+                                      Icons.camera_alt_rounded,
+                                      color: Colors.white,
+                                    )),
+                              ),
+                            )
+                          ]),
+                        );
+                      }),
                 ),
                 const SizedBox(
                   height: 150,
