@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:audio_player/database/sondDb.dart';
 import 'package:audio_player/kvalues.dart';
 import 'package:audio_player/screens/favoritepage.dart';
@@ -7,8 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.nicknamefromnicknamepage});
+  const HomePage(
+      {super.key,
+      required this.nicknamefromnicknamepage,
+      required this.getprofile});
   final String nicknamefromnicknamepage;
+  final File getprofile;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +46,8 @@ class HomePage extends StatelessWidget {
             ],
           ),
           ListTile(
-            leading: const CircleAvatar(
-              backgroundImage: AssetImage(
-                  "assets/songsSS/pngtree-cute-red-blue-musical-notes-music-logo-png-image_3223600.jpeg"),
+            leading: CircleAvatar(
+              backgroundImage: FileImage(getprofile),
               radius: 25,
             ),
             title: Text(

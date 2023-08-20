@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:audio_player/model/datamodel.dart';
 import 'package:audio_player/screens/homepage.dart';
 import 'package:audio_player/screens/nicknamescreen.dart';
@@ -25,16 +27,17 @@ Future<void> main() async {
 }
 
 class BottomNavigatonBars extends StatelessWidget {
-  const BottomNavigatonBars({super.key, required this.nickname});
+  const BottomNavigatonBars(
+      {super.key, required this.nickname, required this.getprofile});
   final String nickname;
   static ValueNotifier<int> valueNotifier = ValueNotifier(0);
+
+  final File getprofile;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> items = [
-      HomePage(
-        nicknamefromnicknamepage: nickname,
-      ),
+      HomePage(nicknamefromnicknamepage: nickname, getprofile: getprofile),
       SearchPageScreen(),
       LibraryPage(),
       SettingsPage()

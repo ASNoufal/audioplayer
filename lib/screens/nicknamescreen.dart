@@ -130,6 +130,7 @@ class _NicknamescreenState extends State<Nicknamescreen> {
                               MaterialPageRoute(builder: (builder) {
                             return BottomNavigatonBars(
                               nickname: nicknamecontroller.text,
+                              getprofile: currentimage!,
                             );
                           }));
                         },
