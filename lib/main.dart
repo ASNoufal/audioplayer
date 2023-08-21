@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:audio_player/model/datamodel.dart';
+import 'package:audio_player/model/username.dart';
 import 'package:audio_player/screens/homepage.dart';
 import 'package:audio_player/screens/nicknamescreen.dart';
 import 'package:audio_player/screens/searchpage.dart';
@@ -23,6 +24,11 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(DataModelAdapter().typeId)) {
     Hive.registerAdapter(DataModelAdapter());
   }
+  if (!Hive.isAdapterRegistered(UsernameAdapter().typeId)) {
+    Hive.registerAdapter(UsernameAdapter());
+  }
+  box = await Hive.openBox('username');
+
   runApp(MaterialApp(theme: ThemeData(), home: const Nicknamescreen()));
 }
 
@@ -37,7 +43,9 @@ class BottomNavigatonBars extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> items = [
-      HomePage(nicknamefromnicknamepage: nickname, getprofile: getprofile),
+      HomePage(
+        getprofile: getprofile,
+      ),
       SearchPageScreen(),
       LibraryPage(),
       SettingsPage()

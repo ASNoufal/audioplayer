@@ -1,14 +1,20 @@
+import 'dart:io';
+
 import 'package:audio_player/kvalues.dart';
 import 'package:audio_player/model/datamodel.dart';
+import 'package:audio_player/model/username.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 const dbname = "opened songdatabase";
+const profiledb = "opened the profilepic";
 
 abstract class Songdata {
   Future<void> addsongdata(DataModel dataModel);
   Future<List<DataModel>> getsongdata();
   Future<void> deletesongdata(String id);
+  Future<void> username(Username name);
+  Future<void> getusername();
 }
 
 class Songdb implements Songdata {
@@ -56,4 +62,27 @@ class Songdb implements Songdata {
     "${songvalueNotifier.value}";
     return super.toString();
   }
+
+  @override
+  Future<void> username(Username name) async {
+    final openbox = await Hive.openBox<Username>(profiledb);
+    await openbox.put("Id", name);
+  }
+
+  @override
+  Future<Username?> getusername() async {
+    final openbox = await Hive.openBox<Username>(profiledb);
+    return openbox.get("id");
+  }
+
+  // @override
+  // Future<String> getname()async  {
+  //   final openbox =  Hive.openBox<String>("name");
+  //    return openbox.values;
+  // }
+
+  // @overridef
+  // Future<void> addprofilepicture(String data) async {
+  //   final openbox = await Hive.openBox(profiledb);
+  //    await openbox.add(data);
 }

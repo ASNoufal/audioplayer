@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:audio_player/database/sondDb.dart';
 import 'package:audio_player/kvalues.dart';
+import 'package:audio_player/model/username.dart';
 import 'package:audio_player/screens/favoritepage.dart';
 import 'package:audio_player/screens/musicpage.dart';
 import 'package:audio_player/widget/favoriteButton.dart';
@@ -9,15 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage(
-      {super.key,
-      required this.nicknamefromnicknamepage,
-      required this.getprofile});
-  final String nicknamefromnicknamepage;
+  const HomePage({super.key, required this.getprofile});
+
   final File getprofile;
 
   @override
   Widget build(BuildContext context) {
+    Username data = box.get("id");
+    print(data.name);
     Songdb().refreshui();
     return SafeArea(
       child: ListView(
@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
               radius: 25,
             ),
             title: Text(
-              nicknamefromnicknamepage.toUpperCase(),
+              data.name,
               style: const TextStyle(
                   color: Colors.white38, fontSize: 15, letterSpacing: 1),
             ),

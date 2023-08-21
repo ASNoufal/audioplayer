@@ -1,4 +1,7 @@
+import 'package:audio_player/database/sondDb.dart';
 import 'package:audio_player/main.dart';
+import 'package:audio_player/model/datamodel.dart';
+import 'package:audio_player/model/username.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,7 +53,7 @@ class _NicknamescreenState extends State<Nicknamescreen> {
     });
   }
 
-  TextEditingController nicknamecontroller = TextEditingController();
+  var nicknamecontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,6 +129,11 @@ class _NicknamescreenState extends State<Nicknamescreen> {
                           if (nicknamecontroller.text.isEmpty) {
                             return;
                           }
+                          String name = nicknamecontroller.text;
+                          setState(() {
+                            box.put("id", Username(name: name));
+                          });
+
                           Navigator.push(context,
                               MaterialPageRoute(builder: (builder) {
                             return BottomNavigatonBars(
