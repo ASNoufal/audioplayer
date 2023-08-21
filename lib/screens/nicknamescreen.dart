@@ -49,7 +49,6 @@ class _NicknamescreenState extends State<Nicknamescreen> {
     }
     setState(() {
       currentimage = File(pickedimage.path);
-      print(currentimage);
     });
   }
 
@@ -133,10 +132,11 @@ class _NicknamescreenState extends State<Nicknamescreen> {
                             return;
                           }
                           String name = nicknamecontroller.text;
+                          String profilepic = currentimage!.path;
                           setState(() {
                             box.put("id", Username(name: name));
                             profilebox.put("profile",
-                                ProfilePicture(profilepic: currentimage));
+                                ProfilePicture(profilepic: profilepic));
                           });
 
                           Navigator.push(context,

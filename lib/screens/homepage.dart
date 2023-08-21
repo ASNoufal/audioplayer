@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:audio_player/database/sondDb.dart';
 import 'package:audio_player/kvalues.dart';
+import 'package:audio_player/model/filemodelpath.dart';
 import 'package:audio_player/model/profilepicture.dart';
 import 'package:audio_player/model/username.dart';
 import 'package:audio_player/screens/favoritepage.dart';
@@ -10,6 +11,7 @@ import 'package:audio_player/screens/nicknamescreen.dart';
 import 'package:audio_player/widget/favoriteButton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.getprofile});
@@ -18,15 +20,18 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FileTypeAdapter fileTypeAdapter = FileTypeAdapter();
     Username data = box.get("id");
     ProfilePicture? profiles = box.get("profile");
+
     print(profiles);
     print(data.name);
     Songdb().refreshui();
 
     Future<ImageProvider<Object>> getimage() async {
       if (profiles?.profilepic != null) {
-        return FileImage(profiles!.profilepic!);
+        File profilePicFile = File(profiles!.profilepic!);
+        return FileImage(profilePicFile);
       } else {
         String localpath =
             await convertAssetUrlToFileImagePath('assets/songsSS/no image.png');

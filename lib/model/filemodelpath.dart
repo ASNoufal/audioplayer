@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 
 class FileTypeAdapter extends TypeAdapter<File> {
   @override
-  final typeId = 100; // Assign a unique typeId
+  final typeId = 3; // Assign a unique typeId
 
   @override
   File read(BinaryReader reader) {

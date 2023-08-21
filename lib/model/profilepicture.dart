@@ -6,7 +6,7 @@ part 'profilepicture.g.dart';
 @HiveType(typeId: 3)
 class ProfilePicture {
   @HiveField(0)
-  File? profilepic;
+  String? profilepic;
   ProfilePicture({required this.profilepic});
 }
 

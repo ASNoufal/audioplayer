@@ -38,7 +38,7 @@ Future<void> main() async {
   }
 
   box = await Hive.openBox('username');
-  profilebox = await Hive.openBox(profiledb);
+  profilebox = await Hive.openBox<ProfilePicture>(profiledb);
 
   runApp(MaterialApp(theme: ThemeData(), home: const Nicknamescreen()));
 }
