@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:audio_player/database/sondDb.dart';
 import 'package:audio_player/kvalues.dart';
+import 'package:audio_player/model/profilepicture.dart';
 import 'package:audio_player/model/username.dart';
 import 'package:audio_player/screens/favoritepage.dart';
 import 'package:audio_player/screens/musicpage.dart';
+import 'package:audio_player/screens/nicknamescreen.dart';
 import 'package:audio_player/widget/favoriteButton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,39 +19,53 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Username data = box.get("id");
+    ProfilePicture? profiles = box.get("profile");
+    print(profiles);
     print(data.name);
     Songdb().refreshui();
+
+    Future<ImageProvider<Object>> getimage() async {
+      if (profiles?.profilepic != null) {
+        return FileImage(profiles!.profilepic!);
+      } else {
+        String localpath =
+            await convertAssetUrlToFileImagePath('assets/songsSS/no image.png');
+        return FileImage(File(localpath));
+      }
+    }
+
     return SafeArea(
       child: ListView(
         children: [
-          Row(
-            children: [
-              Padding(padding: const EdgeInsets.all(15.0), child: welcome()),
-              const Spacer(),
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (builder) {
-                      return const FavoriteScreen();
-                    }));
-                  },
-                  icon: const Icon(
-                    Icons.favorite_rounded,
-                    color: Colors.white,
-                  )),
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.blur_on,
-                    color: Colors.white,
-                  ))
-            ],
-          ),
+          Row(children: [
+            Padding(padding: const EdgeInsets.all(15.0), child: welcome()),
+            const Spacer(),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (builder) {
+                    return const FavoriteScreen();
+                  }));
+                },
+                icon: const Icon(
+                  Icons.favorite_rounded,
+                  color: Colors.white,
+                )),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.blur_on,
+                  color: Colors.white,
+                ))
+          ]),
           ListTile(
-            leading: CircleAvatar(
-              backgroundImage: FileImage(getprofile),
-              radius: 25,
-            ),
+            leading: FutureBuilder<ImageProvider>(
+                future: getimage(),
+                builder: (context, snapshort) {
+                  return CircleAvatar(
+                    backgroundImage: snapshort.data,
+                    radius: 25,
+                  );
+                }),
             title: Text(
               data.name,
               style: const TextStyle(

@@ -1,6 +1,5 @@
-import 'package:audio_player/database/sondDb.dart';
 import 'package:audio_player/main.dart';
-import 'package:audio_player/model/datamodel.dart';
+import 'package:audio_player/model/profilepicture.dart';
 import 'package:audio_player/model/username.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +7,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+
+Future<String> convertAssetUrlToFileImagePath(String assetUrl) async {
+  Directory tempDir = await getTemporaryDirectory();
+  String fileName = DateTime.now().millisecondsSinceEpoch.toString() + ".png";
+  String localFilePath = "${tempDir.path}/$fileName";
+
+  ByteData data = await rootBundle.load(assetUrl);
+  List<int> bytes = data.buffer.asUint8List();
+
+  File localFile = File(localFilePath);
+  await localFile.writeAsBytes(bytes);
+
+  return localFilePath;
+}
 
 class Nicknamescreen extends StatefulWidget {
   const Nicknamescreen({super.key});
@@ -17,20 +30,6 @@ class Nicknamescreen extends StatefulWidget {
 }
 
 class _NicknamescreenState extends State<Nicknamescreen> {
-  Future<String> convertAssetUrlToFileImagePath(String assetUrl) async {
-    Directory tempDir = await getTemporaryDirectory();
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString() + ".png";
-    String localFilePath = "${tempDir.path}/$fileName";
-
-    ByteData data = await rootBundle.load(assetUrl);
-    List<int> bytes = data.buffer.asUint8List();
-
-    File localFile = File(localFilePath);
-    await localFile.writeAsBytes(bytes);
-
-    return localFilePath;
-  }
-
   Future<ImageProvider<Object>> getImageFilePath() async {
     if (currentimage != null) {
       return FileImage(currentimage!);
@@ -50,6 +49,7 @@ class _NicknamescreenState extends State<Nicknamescreen> {
     }
     setState(() {
       currentimage = File(pickedimage.path);
+      print(currentimage);
     });
   }
 
@@ -129,9 +129,14 @@ class _NicknamescreenState extends State<Nicknamescreen> {
                           if (nicknamecontroller.text.isEmpty) {
                             return;
                           }
+                          if (currentimage == null) {
+                            return;
+                          }
                           String name = nicknamecontroller.text;
                           setState(() {
                             box.put("id", Username(name: name));
+                            profilebox.put("profile",
+                                ProfilePicture(profilepic: currentimage));
                           });
 
                           Navigator.push(context,

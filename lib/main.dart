@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:audio_player/database/sondDb.dart';
 import 'package:audio_player/model/datamodel.dart';
+import 'package:audio_player/model/filemodelpath.dart';
+import 'package:audio_player/model/profilepicture.dart';
 import 'package:audio_player/model/username.dart';
 import 'package:audio_player/screens/homepage.dart';
 import 'package:audio_player/screens/nicknamescreen.dart';
@@ -27,7 +30,15 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(UsernameAdapter().typeId)) {
     Hive.registerAdapter(UsernameAdapter());
   }
+  if (!Hive.isAdapterRegistered(ProfilePictureAdapter().typeId)) {
+    Hive.registerAdapter(ProfilePictureAdapter());
+  }
+  if (!Hive.isAdapterRegistered(FileTypeAdapter().typeId)) {
+    Hive.registerAdapter(FileTypeAdapter());
+  }
+
   box = await Hive.openBox('username');
+  profilebox = await Hive.openBox(profiledb);
 
   runApp(MaterialApp(theme: ThemeData(), home: const Nicknamescreen()));
 }
@@ -46,9 +57,9 @@ class BottomNavigatonBars extends StatelessWidget {
       HomePage(
         getprofile: getprofile,
       ),
-      SearchPageScreen(),
-      LibraryPage(),
-      SettingsPage()
+      const SearchPageScreen(),
+      const LibraryPage(),
+      const SettingsPage()
     ];
     return ValueListenableBuilder(
         valueListenable: valueNotifier,
