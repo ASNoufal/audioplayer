@@ -1,10 +1,8 @@
-import 'dart:io';
-
-import 'package:audio_player/database/sondDb.dart';
 import 'package:audio_player/model/datamodel.dart';
 import 'package:audio_player/model/filemodelpath.dart';
 import 'package:audio_player/model/profilepicture.dart';
 import 'package:audio_player/model/username.dart';
+import 'package:audio_player/screens/favoritepage.dart';
 import 'package:audio_player/screens/homepage.dart';
 import 'package:audio_player/screens/nicknamescreen.dart';
 import 'package:audio_player/screens/searchpage.dart';
@@ -62,7 +60,7 @@ class BottomNavigatonBars extends StatelessWidget {
     List<Widget> items = [
       const HomePage(),
       const SearchPageScreen(),
-      const LibraryPage(),
+      const FavoriteScreen(),
       const SettingsPage()
     ];
     return ValueListenableBuilder(
@@ -119,8 +117,8 @@ class BottomNavigatorBaritem extends StatelessWidget {
                     textColor: Colors.grey,
                   ),
                   GButton(
-                    icon: Icons.my_library_music,
-                    text: "Your Library",
+                    icon: Icons.favorite,
+                    text: "Favorites",
                     iconColor: Colors.white,
                     textColor: Colors.grey,
                   ),

@@ -10,10 +10,17 @@ import 'package:audio_player/widget/favoriteButton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
   });
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool ismorebuttonclicked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,30 +35,17 @@ class HomePage extends StatelessWidget {
           Row(children: [
             Padding(padding: const EdgeInsets.all(15.0), child: welcome()),
             const Spacer(),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (builder) {
-                    return const FavoriteScreen();
-                  }));
-                },
-                icon: const Icon(
-                  Icons.favorite_rounded,
-                  color: Colors.white,
-                )),
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.blur_on,
-                  color: Colors.white,
-                ))
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                radius: 25,
+                backgroundImage: FileImage(File(profiles.profilepic)),
+              ),
+            )
           ]),
           ListTile(
-            leading: CircleAvatar(
-              backgroundImage: FileImage(File(profiles.profilepic)),
-              radius: 25,
-            ),
             title: Text(
-              data.name,
+              data.name.toUpperCase(),
               style: const TextStyle(
                   color: Colors.white38, fontSize: 15, letterSpacing: 1),
             ),
@@ -60,10 +54,18 @@ class HomePage extends StatelessWidget {
               style: kdash,
             ),
             trailing: TextButton(
-              onPressed: () {},
-              child: const Text(
-                "more",
-                style: TextStyle(color: Colors.white38),
+              onPressed: () {
+                setState(() {
+                  if (ismorebuttonclicked == false) {
+                    ismorebuttonclicked = true;
+                  } else {
+                    ismorebuttonclicked = false;
+                  }
+                });
+              },
+              child: Text(
+                ismorebuttonclicked == false ? "more" : "Less",
+                style: const TextStyle(color: Colors.white38),
               ),
             ),
           ),
@@ -74,8 +76,8 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 20, bottom: 10, top: 10),
                 scrollDirection: Axis.horizontal,
                 itemCount: dataModel.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: ismorebuttonclicked == false ? 1 : 2),
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
