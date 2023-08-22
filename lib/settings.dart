@@ -1,4 +1,6 @@
+import 'package:audio_player/kvalues.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -14,47 +16,90 @@ class _SettingsPageState extends State<SettingsPage> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black12,
-        title: Text("Settings"),
+        title: const Text("Settings"),
       ),
       body: Column(
         children: [
-          SettingsName(
-            titleData: "Notification",
-            subtitleData: "to get notification",
-          ),
-          GestureDetector(
+          InkWell(
             onTap: () {
               setState(() {
                 onTermsandCondition(context);
               });
             },
-            child: SettingsName(
+            child: const SettingsName(
               titleData: "Terms and Condition",
               subtitleData: "All the stuff you need to know",
             ),
           ),
-          GestureDetector(
+          InkWell(
             onTap: () {
               setState(() {
                 onPrivacyandCondition(context);
               });
             },
-            child: SettingsName(
+            child: const SettingsName(
               titleData: "Privacy Policy",
               subtitleData: "Important for both of us",
             ),
           ),
-          SettingsName(
-            titleData: "Share the App",
-            subtitleData: "shareeee....!!!",
+          InkWell(
+            onTap: () {
+              Share.share("https://github.com/ASNoufal/audioplayer.git",
+                  subject: "Git repo of the App");
+            },
+            child: const SettingsName(
+              titleData: "Share the App",
+              subtitleData: "shareeee....!!!",
+            ),
           ),
-          SettingsName(
-            titleData: "Third party Application",
-            subtitleData: "......!!!!",
-          ),
-          SettingsName(
-            titleData: "About",
-            subtitleData: "About the App",
+          InkWell(
+            onTap: () {
+              showDialog<void>(
+                context: context,
+                barrierDismissible: false, // user must tap button!
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    backgroundColor: Colors.black,
+                    title: const Text(
+                      "Music Player",
+                      style: kdash,
+                    ),
+                    content: const SingleChildScrollView(
+                      child: ListBody(
+                        children: <Widget>[
+                          Text(
+                            'It is an offline music player app which allows to hear music from their storage and also do function like add to favorites',
+                            style: kwhite,
+                          ),
+                          Text(
+                            'App developed by Naufal',
+                            style: kwhite,
+                          ),
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            iconColor: Colors.red,
+                            backgroundColor: Colors.grey[600]),
+                        child: const Text(
+                          'Approve',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: const SettingsName(
+              titleData: "About",
+              subtitleData: "About the App",
+            ),
           ),
         ],
       ),
@@ -72,13 +117,13 @@ class SettingsName extends StatelessWidget {
     return ListTile(
       title: Text(
         titleData,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       subtitle: Text(
         subtitleData,
-        style: TextStyle(color: Colors.white38),
+        style: const TextStyle(color: Colors.white38),
       ),
-      trailing: Icon(
+      trailing: const Icon(
         Icons.arrow_forward,
         color: Colors.white38,
       ),
@@ -102,7 +147,7 @@ void onTermsandCondition(BuildContext context) {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Text("ok")),
+                      icon: const Text("ok")),
                 ]),
           ],
         );
