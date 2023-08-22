@@ -37,26 +37,22 @@ Future<void> main() async {
     Hive.registerAdapter(FileTypeAdapter());
   }
 
-  box = await Hive.openBox('username');
-  profilebox = await Hive.openBox<ProfilePicture>(profiledb);
+  box = await Hive.openBox<Username>('username');
+  profilebox = await Hive.openBox<ProfilePicture>('data profile open');
 
   runApp(MaterialApp(theme: ThemeData(), home: const Nicknamescreen()));
 }
 
 class BottomNavigatonBars extends StatelessWidget {
-  const BottomNavigatonBars(
-      {super.key, required this.nickname, required this.getprofile});
-  final String nickname;
+  const BottomNavigatonBars({
+    super.key,
+  });
   static ValueNotifier<int> valueNotifier = ValueNotifier(0);
-
-  final File getprofile;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> items = [
-      HomePage(
-        getprofile: getprofile,
-      ),
+      const HomePage(),
       const SearchPageScreen(),
       const LibraryPage(),
       const SettingsPage()

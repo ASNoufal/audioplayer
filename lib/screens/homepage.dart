@@ -14,30 +14,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.getprofile});
-
-  final File getprofile;
+  const HomePage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    FileTypeAdapter fileTypeAdapter = FileTypeAdapter();
-    Username data = box.get("id");
-    ProfilePicture? profiles = box.get("profile");
-
-    print(profiles);
-    print(data.name);
     Songdb().refreshui();
 
-    Future<ImageProvider<Object>> getimage() async {
-      if (profiles?.profilepic != null) {
-        File profilePicFile = File(profiles!.profilepic!);
-        return FileImage(profilePicFile);
-      } else {
-        String localpath =
-            await convertAssetUrlToFileImagePath('assets/songsSS/no image.png');
-        return FileImage(File(localpath));
-      }
-    }
+    Username data = box.get("id");
+    final profiles = profilebox.get("profile");
+    print(profiles);
+
+    // Now you have the File object representing the profile picture
 
     return SafeArea(
       child: ListView(
@@ -63,14 +52,10 @@ class HomePage extends StatelessWidget {
                 ))
           ]),
           ListTile(
-            leading: FutureBuilder<ImageProvider>(
-                future: getimage(),
-                builder: (context, snapshort) {
-                  return CircleAvatar(
-                    backgroundImage: snapshort.data,
-                    radius: 25,
-                  );
-                }),
+            leading: CircleAvatar(
+              backgroundImage: FileImage(File(profiles.profilepic)),
+              radius: 25,
+            ),
             title: Text(
               data.name,
               style: const TextStyle(

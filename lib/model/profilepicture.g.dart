@@ -17,7 +17,7 @@ class ProfilePictureAdapter extends TypeAdapter<ProfilePicture> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ProfilePicture(
-      profilepic: fields[0] as String?,
+      profilepic: fields[0] as String,
     );
   }
 

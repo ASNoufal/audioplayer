@@ -30,31 +30,33 @@ class Nicknamescreen extends StatefulWidget {
 }
 
 class _NicknamescreenState extends State<Nicknamescreen> {
-  Future<ImageProvider<Object>> getImageFilePath() async {
-    if (currentimage != null) {
-      return FileImage(currentimage!);
-    } else {
-      String localpath =
-          await convertAssetUrlToFileImagePath('assets/songsSS/no image.png');
-      return FileImage(File(localpath));
-    }
-  }
-
   File? currentimage;
-  void opencamera() async {
-    final imagepicker = ImagePicker();
-    final pickedimage = await imagepicker.pickImage(source: ImageSource.camera);
-    if (pickedimage == null) {
-      return;
-    }
-    setState(() {
-      currentimage = File(pickedimage.path);
-    });
-  }
 
   var nicknamecontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Future<ImageProvider<Object>> getImageFilePath() async {
+      if (currentimage != null) {
+        return FileImage(currentimage!);
+      } else {
+        String localpath =
+            await convertAssetUrlToFileImagePath('assets/songsSS/no image.png');
+        return FileImage(File(localpath));
+      }
+    }
+
+    void opencamera() async {
+      final imagepicker = ImagePicker();
+      final pickedimage =
+          await imagepicker.pickImage(source: ImageSource.camera);
+      if (pickedimage == null) {
+        return;
+      }
+      setState(() {
+        currentimage = File(pickedimage.path);
+      });
+    }
+
     return Scaffold(
       backgroundColor: Colors.black12,
       body: SafeArea(
@@ -70,36 +72,32 @@ class _NicknamescreenState extends State<Nicknamescreen> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FutureBuilder<ImageProvider>(
-                      future: getImageFilePath(),
-                      builder: (context, snapshort) {
-                        if (snapshort.connectionState ==
-                            ConnectionState.waiting) {
-                          const CircularProgressIndicator();
-                        }
-                        return CircleAvatar(
-                          radius: 60,
-                          backgroundImage: snapshort.data,
-                          child: Stack(children: [
-                            Positioned(
-                              right: 0,
-                              bottom: 0,
-                              child: CircleAvatar(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 41, 122, 44),
-                                child: IconButton(
-                                    onPressed: opencamera,
-                                    icon: const Icon(
-                                      Icons.camera_alt_rounded,
-                                      color: Colors.white,
-                                    )),
-                              ),
-                            )
-                          ]),
-                        );
-                      }),
-                ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: FutureBuilder<ImageProvider>(
+                        future: getImageFilePath(),
+                        builder: (context, snapshot) {
+                          return CircleAvatar(
+                            radius: 60,
+                            backgroundImage: snapshot.data,
+                            child: Stack(children: [
+                              Positioned(
+                                right: 0,
+                                bottom: 0,
+                                child: CircleAvatar(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 41, 122, 44),
+                                  child: IconButton(
+                                      onPressed: opencamera,
+                                      icon: const Icon(
+                                        Icons.camera_alt_rounded,
+                                        color: Colors.white,
+                                      )),
+                                ),
+                              )
+                            ]),
+                          );
+                        })),
+
                 const SizedBox(
                   height: 150,
                 ),
@@ -132,19 +130,15 @@ class _NicknamescreenState extends State<Nicknamescreen> {
                             return;
                           }
                           String name = nicknamecontroller.text;
-                          String profilepic = currentimage!.path;
-                          setState(() {
-                            box.put("id", Username(name: name));
-                            profilebox.put("profile",
-                                ProfilePicture(profilepic: profilepic));
-                          });
+
+                          box.put("id", Username(name: name));
+
+                          profilebox.put("profile",
+                              ProfilePicture(profilepic: currentimage!.path));
 
                           Navigator.push(context,
                               MaterialPageRoute(builder: (builder) {
-                            return BottomNavigatonBars(
-                              nickname: nicknamecontroller.text,
-                              getprofile: currentimage!,
-                            );
+                            return BottomNavigatonBars();
                           }));
                         },
                         child: Container(
