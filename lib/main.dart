@@ -40,7 +40,15 @@ Future<void> main() async {
   box = await Hive.openBox<Username>('username');
   profilebox = await Hive.openBox<ProfilePicture>('data profile open');
 
-  runApp(MaterialApp(theme: ThemeData(), home: const Nicknamescreen()));
+  runApp(MaterialApp(theme: ThemeData(), home: data()));
+}
+
+Widget data() {
+  if (profilebox.values.isEmpty || box.values.isEmpty) {
+    return const Nicknamescreen();
+  } else {
+    return const BottomNavigatonBars();
+  }
 }
 
 class BottomNavigatonBars extends StatelessWidget {
