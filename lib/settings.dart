@@ -81,7 +81,6 @@ class _SettingsPageState extends State<SettingsPage> {
                     actions: <Widget>[
                       TextButton(
                         style: TextButton.styleFrom(
-                            iconColor: Colors.red,
                             backgroundColor: Colors.grey[600]),
                         child: const Text(
                           'Approve',

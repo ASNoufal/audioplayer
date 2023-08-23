@@ -1,5 +1,9 @@
+import 'package:audio_player/kvalues.dart';
+import 'package:audio_player/screens/musicpage.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+
+bool? playing;
 
 class Control extends StatelessWidget {
   const Control({super.key, required this.audioPlayer});
@@ -34,14 +38,18 @@ class Control extends StatelessWidget {
             builder: (context, snapshot) {
               final playerState = snapshot.data;
               final processingState = playerState?.processingState;
-              final playing = playerState?.playing;
+              playing = playerState?.playing;
               if (!(playing ?? false)) {
+                print(playing);
+                print('----');
                 return IconButton(
                     onPressed: audioPlayer.play,
                     iconSize: 55,
                     color: Colors.white,
                     icon: const Icon(Icons.play_arrow_rounded));
               } else if (processingState != ProcessingState.completed) {
+                print(playing);
+
                 return IconButton(
                     onPressed: audioPlayer.pause,
                     iconSize: 55,
@@ -66,7 +74,9 @@ class Control extends StatelessWidget {
               color: Colors.white,
             )),
         IconButton(
-            onPressed: audioPlayer.seekToNext,
+            onPressed: () {
+              audioPlayer.seekToNext();
+            },
             icon: const Icon(
               Icons.skip_next,
               size: 35,

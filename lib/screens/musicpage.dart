@@ -10,6 +10,8 @@ import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:rxdart/rxdart.dart';
 
+bool ismusicplaying = false;
+
 class MusicPage extends StatefulWidget {
   const MusicPage(
       {super.key, required this.dataModel, required this.indexofsong});
@@ -56,7 +58,12 @@ class _MusicPageState extends State<MusicPage> {
 
   @override
   void dispose() {
-    _audioPlayer.dispose();
+    print(playing);
+    if (playing == false) {
+      _audioPlayer.dispose();
+      super.dispose();
+    }
+    playing == false;
     super.dispose();
   }
 

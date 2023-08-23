@@ -4,6 +4,7 @@ import 'package:audio_player/model/profilepicture.dart';
 import 'package:audio_player/model/username.dart';
 import 'package:audio_player/screens/favoritepage.dart';
 import 'package:audio_player/screens/homepage.dart';
+import 'package:audio_player/screens/insidemusic.dart';
 import 'package:audio_player/screens/nicknamescreen.dart';
 import 'package:audio_player/screens/searchpage.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -67,6 +68,7 @@ class BottomNavigatonBars extends StatelessWidget {
         valueListenable: valueNotifier,
         builder: (context, newvalue, _) {
           return Scaffold(
+            bottomSheet: const InsideMusicscreen(),
             backgroundColor: Colors.black,
             bottomNavigationBar: const BottomNavigatorBaritem(),
             body: items[newvalue],
@@ -98,7 +100,7 @@ class BottomNavigatorBaritem extends StatelessWidget {
 
                 gap: 8,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                 selectedIndex: index,
                 onTabChange: (value) {
                   BottomNavigatonBars.valueNotifier.value = value;

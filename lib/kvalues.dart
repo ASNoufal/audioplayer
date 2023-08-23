@@ -75,7 +75,7 @@ final audios = ConcatenatingAudioSource(children: [
   AudioSource.uri(
     Uri.parse("https://dns4.pendusaab.com/download/128k-dmhol/Chayapattu.mp3"),
     tag: MediaItem(
-      id: '0',
+      id: dataModel[0].id!,
       title: "Chayappattu",
       artist: 'Sithara',
       artUri: Uri.parse("https://dns2.pendusaab.com/thumbmed/25991521.jpg"),
@@ -85,7 +85,7 @@ final audios = ConcatenatingAudioSource(children: [
     Uri.parse(
         "https://ghantalele.com/uploads/files/data-19/9493/Aise%20Kyun_192(Ghantalele.com).mp3"),
     tag: MediaItem(
-      id: '1',
+      id: dataModel[1].id!,
       title: dataModel[1].songname,
       artist: dataModel[1].authorname,
       artUri: Uri.parse("https://ghantalele.com/uploads/thumbs/cat/1530_2.jpg"),
