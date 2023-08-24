@@ -50,22 +50,23 @@ class _MusicPageState extends State<MusicPage> {
     }
 
     try {
-      await _audioPlayer.setAudioSource(audios[widget.indexofsong]);
+      await _audioPlayer.setAudioSource(audios);
     } catch (e) {
       print("Error loading audio source: $e");
     }
   }
 
-  @override
-  void dispose() {
-    print(playing);
-    if (playing == false) {
-      _audioPlayer.dispose();
-      super.dispose();
-    }
-    playing == false;
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   print(playing);
+  //   if (playing == false) {
+  //     _audioPlayer.dispose();
+  //     super.dispose();
+  //   }
+  //   playing == false;
+
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
