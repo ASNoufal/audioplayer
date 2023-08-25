@@ -50,7 +50,8 @@ class _MusicPageState extends State<MusicPage> {
     }
 
     try {
-      await _audioPlayer.setAudioSource(audios);
+      await _audioPlayer.setAudioSource(audios[widget.indexofsong]);
+      setState(() {});
     } catch (e) {
       print("Error loading audio source: $e");
     }
@@ -132,7 +133,10 @@ class _MusicPageState extends State<MusicPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Control(audioPlayer: _audioPlayer)
+                  Control(
+                    audioPlayer: _audioPlayer,
+                    index: widget.indexofsong,
+                  )
                 ],
               ),
             ),

@@ -6,9 +6,10 @@ import 'package:just_audio/just_audio.dart';
 bool? playing;
 
 class Control extends StatelessWidget {
-  const Control({super.key, required this.audioPlayer});
+  Control({super.key, required this.audioPlayer, required this.index});
 
   final AudioPlayer audioPlayer;
+  int index;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,9 @@ class Control extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
-            onPressed: audioPlayer.seekToPrevious,
+            onPressed: () {
+              audioPlayer.setAudioSource(audios[index--]);
+            },
             icon: const Icon(
               Icons.skip_previous,
               size: 35,
@@ -75,7 +78,7 @@ class Control extends StatelessWidget {
             )),
         IconButton(
             onPressed: () {
-              audioPlayer.seekToNext();
+              audioPlayer.setAudioSource(audios[index++]);
             },
             icon: const Icon(
               Icons.skip_next,
