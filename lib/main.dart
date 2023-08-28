@@ -7,6 +7,7 @@ import 'package:audio_player/screens/homepage.dart';
 import 'package:audio_player/screens/insidemusic.dart';
 import 'package:audio_player/screens/nicknamescreen.dart';
 import 'package:audio_player/screens/searchpage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import 'package:audio_player/settings.dart';
@@ -39,7 +40,7 @@ Future<void> main() async {
   box = await Hive.openBox<Username>('username');
   profilebox = await Hive.openBox<ProfilePicture>('data profile open');
 
-  runApp(MaterialApp(theme: ThemeData(), home: data()));
+  runApp(MaterialApp(theme: ThemeData(), home: ProviderScope(child: data())));
 }
 
 Widget data() {

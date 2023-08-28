@@ -9,6 +9,7 @@ import 'package:audio_player/screens/musicpage.dart';
 import 'package:audio_player/widget/favoriteButton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -21,6 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool ismorebuttonclicked = false;
+  late AudioPlayer audioplayer;
 
   @override
   Widget build(BuildContext context) {

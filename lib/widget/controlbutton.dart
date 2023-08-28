@@ -18,7 +18,7 @@ class Control extends StatelessWidget {
       children: [
         IconButton(
             onPressed: () {
-              audioPlayer.setAudioSource(audios[index--]);
+              audioPlayer.setAudioSource(audios[--index]);
             },
             icon: const Icon(
               Icons.skip_previous,
@@ -78,7 +78,7 @@ class Control extends StatelessWidget {
             )),
         IconButton(
             onPressed: () {
-              audioPlayer.setAudioSource(audios[index++]);
+              audioPlayer.setAudioSource(audios[++index]);
             },
             icon: const Icon(
               Icons.skip_next,

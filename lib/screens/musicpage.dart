@@ -2,12 +2,15 @@ import 'dart:ui';
 
 import 'package:audio_player/kvalues.dart';
 import 'package:audio_player/model/datamodel.dart';
+import 'package:audio_player/provider/audioprovider.dart';
 import 'package:audio_player/widget/controlbutton.dart';
 import 'package:audio_player/widget/mediametadata.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:rxdart/rxdart.dart';
 
 bool ismusicplaying = false;
@@ -25,6 +28,7 @@ class MusicPage extends StatefulWidget {
 
 class _MusicPageState extends State<MusicPage> {
   late AudioPlayer _audioPlayer;
+  late AudioPlayerController audioPlayerController;
 
   Stream<PositionData> get _positionDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
@@ -37,7 +41,10 @@ class _MusicPageState extends State<MusicPage> {
 
   @override
   void initState() {
+    print("while going to next music");
     _audioPlayer = AudioPlayer();
+    audioPlayerController = context.read(audioPlayerControllerProvider);
+
     init();
     super.initState();
   }
@@ -59,18 +66,14 @@ class _MusicPageState extends State<MusicPage> {
 
   // @override
   // void dispose() {
-  //   print(playing);
-  //   if (playing == false) {
-  //     _audioPlayer.dispose();
-  //     super.dispose();
-  //   }
-  //   playing == false;
+  //   _audioPlayer.dispose();
 
   //   super.dispose();
   // }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
