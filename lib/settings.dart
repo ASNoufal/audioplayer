@@ -2,14 +2,9 @@ import 'package:audio_player/kvalues.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
-  @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,9 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           InkWell(
             onTap: () {
-              setState(() {
-                onTermsandCondition(context);
-              });
+              onTermsandCondition(context);
             },
             child: const SettingsName(
               titleData: "Terms and Condition",
@@ -33,9 +26,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           InkWell(
             onTap: () {
-              setState(() {
-                onPrivacyandCondition(context);
-              });
+              onPrivacyandCondition(context);
             },
             child: const SettingsName(
               titleData: "Privacy Policy",

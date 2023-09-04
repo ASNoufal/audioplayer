@@ -1,8 +1,10 @@
 import 'package:audio_player/main.dart';
 import 'package:audio_player/model/profilepicture.dart';
 import 'package:audio_player/model/username.dart';
+import 'package:audio_player/provider/fileprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -22,19 +24,21 @@ Future<String> convertAssetUrlToFileImagePath(String assetUrl) async {
   return localFilePath;
 }
 
-class Nicknamescreen extends StatefulWidget {
+class Nicknamescreen extends ConsumerStatefulWidget {
   const Nicknamescreen({super.key});
 
   @override
-  State<Nicknamescreen> createState() => _NicknamescreenState();
+  createState() => _NicknamescreenState();
 }
 
-class _NicknamescreenState extends State<Nicknamescreen> {
+class _NicknamescreenState extends ConsumerState<Nicknamescreen> {
+  final getfiledata = StateProvider<File?>((ref) => null);
   File? currentimage;
 
   var nicknamecontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final filename = ref.watch(getfiledata);
     Future<ImageProvider<Object>> getImageFilePath() async {
       if (currentimage != null) {
         return FileImage(currentimage!);
@@ -52,9 +56,11 @@ class _NicknamescreenState extends State<Nicknamescreen> {
       if (pickedimage == null) {
         return;
       }
-      setState(() {
-        currentimage = File(pickedimage.path);
-      });
+      currentimage =
+          ref.read(getfiledata.notifier).state = File(pickedimage.path);
+      // setState(() {
+      //   currentimage = File(pickedimage.path);
+      // });
     }
 
     return Scaffold(

@@ -58,7 +58,7 @@ class BottomNavigatonBars extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> items = [
-      const HomePage(),
+      const ProviderScope(child: HomePage()),
       const SearchPageScreen(),
       const FavoriteScreen(),
       const SettingsPage()
@@ -95,7 +95,6 @@ class BottomNavigatorBaritem extends StatelessWidget {
                 curve: Curves.easeInOutSine,
                 tabActiveBorder:
                     Border.all(color: Colors.grey.shade600, width: 2.5),
-
                 gap: 8,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
@@ -129,10 +128,6 @@ class BottomNavigatorBaritem extends StatelessWidget {
                     textColor: Colors.grey,
                   )
                 ],
-                // mouseCursor: MaterialStateMouseCursor.textable,
-                // selectedIconTheme: const IconThemeData(color: Colors.white),
-                // unselectedItemColor: Colors.white38,
-                // selectedItemColor: Colors.white,
               ),
             ),
           );
