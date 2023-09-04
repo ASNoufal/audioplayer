@@ -4,14 +4,12 @@ import 'package:audio_player/model/profilepicture.dart';
 import 'package:audio_player/model/username.dart';
 import 'package:audio_player/screens/favoritepage.dart';
 import 'package:audio_player/screens/homepage.dart';
-import 'package:audio_player/screens/insidemusic.dart';
 import 'package:audio_player/screens/nicknamescreen.dart';
 import 'package:audio_player/screens/searchpage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import 'package:audio_player/settings.dart';
-import 'package:audio_player/yourlibrary.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio_background/just_audio_background.dart';
@@ -69,7 +67,6 @@ class BottomNavigatonBars extends StatelessWidget {
         valueListenable: valueNotifier,
         builder: (context, newvalue, _) {
           return Scaffold(
-            bottomSheet: const InsideMusicscreen(),
             backgroundColor: Colors.black,
             bottomNavigationBar: const BottomNavigatorBaritem(),
             body: items[newvalue],

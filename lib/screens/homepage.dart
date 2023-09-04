@@ -21,6 +21,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int currentlyPlayingIndex = -1;
   bool ismorebuttonclicked = false;
   late AudioPlayer audioplayer;
 
@@ -83,6 +84,22 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
+                      if (currentlyPlayingIndex != index) {
+                        audioplayer.stop();
+                      }
+                      // Stop the currently playing song (if any)
+                      if (currentlyPlayingIndex != -1) {
+                        audioplayer.stop();
+                      }
+                      setState(() {
+                        currentlyPlayingIndex = index;
+                      });
+                      audioplayer.setAudioSource(audios[index]);
+                      audioplayer.play();
+                      //
+                      // AudioService.audioPlayer.setAudioSource(audios[index]);
+                      // AudioService.audioPlayer.play();
+
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return MusicPage(
@@ -145,4 +162,8 @@ class _HomePageState extends State<HomePage> {
       );
     }
   }
+}
+
+class AudioService {
+  static final AudioPlayer audioPlayer = AudioPlayer();
 }
