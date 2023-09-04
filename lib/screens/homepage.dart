@@ -4,29 +4,31 @@ import 'package:audio_player/database/sondDb.dart';
 import 'package:audio_player/kvalues.dart';
 import 'package:audio_player/model/profilepicture.dart';
 import 'package:audio_player/model/username.dart';
-import 'package:audio_player/screens/favoritepage.dart';
+import 'package:audio_player/provider/homepageProvider.dart';
 import 'package:audio_player/screens/musicpage.dart';
 import 'package:audio_player/widget/favoriteButton.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({
     super.key,
   });
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  int currentlyPlayingIndex = -1;
-  bool ismorebuttonclicked = false;
+class _HomePageState extends ConsumerState<HomePage> {
   late AudioPlayer audioplayer;
-
+  final provider = StateNotifierProvider<HomePageNotifier, bool>(
+      (ref) => HomePageNotifier());
+  final getindex = StateProvider((ref) => -1);
   @override
   Widget build(BuildContext context) {
+    final currentlyPlayingIndex = ref.watch(getindex);
+    final nameprovider = ref.watch(provider);
     Songdb().refreshui();
 
     Username data = box.get("id");
@@ -58,16 +60,18 @@ class _HomePageState extends State<HomePage> {
             ),
             trailing: TextButton(
               onPressed: () {
-                setState(() {
-                  if (ismorebuttonclicked == false) {
-                    ismorebuttonclicked = true;
-                  } else {
-                    ismorebuttonclicked = false;
-                  }
-                });
+                ref.read(provider.notifier).isbuttonclicked();
+
+                // setState(() {
+                //   if (ismorebuttonclicked == false) {
+                //     ismorebuttonclicked = true;
+                //   } else {
+                //     ismorebuttonclicked = false;
+                //   }
+                // });
               },
               child: Text(
-                ismorebuttonclicked == false ? "more" : "Less",
+                nameprovider == false ? "more" : "Less",
                 style: const TextStyle(color: Colors.white38),
               ),
             ),
@@ -80,25 +84,24 @@ class _HomePageState extends State<HomePage> {
                 scrollDirection: Axis.horizontal,
                 itemCount: dataModel.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: ismorebuttonclicked == false ? 1 : 2),
+                    crossAxisCount: nameprovider == false ? 1 : 2),
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
                       if (currentlyPlayingIndex != index) {
                         audioplayer.stop();
                       }
+
                       // Stop the currently playing song (if any)
                       if (currentlyPlayingIndex != -1) {
                         audioplayer.stop();
                       }
-                      setState(() {
-                        currentlyPlayingIndex = index;
-                      });
+                      ref.read(getindex.notifier).state = index;
+                      // setState(() {
+                      //   currentlyPlayingIndex = index;
+                      // });
                       audioplayer.setAudioSource(audios[index]);
                       audioplayer.play();
-                      //
-                      // AudioService.audioPlayer.setAudioSource(audios[index]);
-                      // AudioService.audioPlayer.play();
 
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
@@ -143,22 +146,22 @@ class _HomePageState extends State<HomePage> {
     final time = DateTime.now().hour;
 
     if (time < 12) {
-      return Text(
+      return const Text(
         "Good morning",
-        style: GoogleFonts.lobster(
-            color: Colors.white, textStyle: const TextStyle(fontSize: 30)),
+        style: TextStyle(
+            color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
       );
     } else if (time < 16) {
-      return Text(
+      return const Text(
         "Good Afternoon",
-        style: GoogleFonts.lobster(
-            color: Colors.white, textStyle: const TextStyle(fontSize: 30)),
+        style: TextStyle(
+            color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
       );
     } else {
-      return Text(
+      return const Text(
         "Good Evening",
-        style: GoogleFonts.lobster(
-            color: Colors.white, textStyle: const TextStyle(fontSize: 30)),
+        style: TextStyle(
+            color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
       );
     }
   }

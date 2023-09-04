@@ -138,7 +138,7 @@ class _NicknamescreenState extends State<Nicknamescreen> {
 
                           Navigator.push(context,
                               MaterialPageRoute(builder: (builder) {
-                            return BottomNavigatonBars();
+                            return const BottomNavigatonBars();
                           }));
                         },
                         child: Container(
